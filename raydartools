@@ -3,8 +3,8 @@
 # Toolkit for server commands
 
 # Static Variables
-URL=raydarnet.info.tm
-USER=rayting
+URL=someURL
+USER=someUser
 SSH_PORT=22
 SOCKS_PORT=6010
 PROGRAMS=(
