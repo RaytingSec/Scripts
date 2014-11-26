@@ -1,0 +1,1 @@
+shutdown -s -t 180 -c "Shutdown in three minutes"

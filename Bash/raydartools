@@ -1,0 +1,103 @@
+#! /bin/sh/
+
+# Toolkit for server commands
+
+# Static Variables
+URL=raydarnet.info.tm
+USER=null # Assumed that server user has same name
+SSH_PORT=22
+SOCKS_PORT=6010
+PROGRAMS=(
+          ssh
+          fail2ban
+          apache2
+          bind9
+         )
+ARRAY_SIZE=${#PROGRAMS[@]}
+
+# Functions
+function HelpText
+{
+    echo "Tool kit for predefined server and user."
+    ListText
+}
+function ListText
+{
+    echo "10s - General"
+    echo "11: Ping test"
+    echo "12: Trace route"
+    echo "13: Nmap"
+    echo "14: Server service control"
+    echo "15: CPU governer"
+    echo "20s - SSH"
+    echo "21: SSH"
+    echo "29: SSH using custom port"
+    echo "30s - Proxy"
+    echo "31: SOCKS Proxy over SSH"
+    echo "39: Proxy using custom port"
+    echo "help: shows this text"
+    echo "list: list of all commands"
+}
+
+# Program
+ListText
+read OPTION
+case $OPTION in
+    # General
+    11)
+        ping $URL -c 5
+        ;;
+    12)
+        traceroute $URL
+        ;;
+    13)
+        nmap $URL
+        ;;
+    14)
+        printf "Command: "
+        read COMMAND
+        let "i=0"
+        while [ $i -ne $ARRAY_SIZE ]; do
+            sudo service ${PROGRAMS[$i]} $COMMAND
+            let "i++"
+        done
+        ;;
+    15)
+        printf "Governer: "
+        read GOV
+        printf "Cores: "
+        read CORES
+        let "i=0"
+        while [ $i -ne $CORES ]; do
+            sudo cpufreq-set -g $GOV -c $i
+            let "i++"
+        done
+        ;;
+    # SSH
+    21)
+        ssh $URL -p $SSH_PORT
+        ;;
+    29)
+        read port
+        ssh $URL -p $port
+        ;;
+    # SOCKS Proxy
+    31)
+        ssh $URL -D $SOCKS_PORT
+        ;;
+    39)
+        read port
+        ssh $URL -D $port
+        ;;
+    # Information
+    help)
+        HelpText
+        ;;
+    list)
+        ListText
+        ;;
+    *)
+        echo "Error: '$OPTION' not recognized. Try using 'help'."
+        ;;
+esac
+

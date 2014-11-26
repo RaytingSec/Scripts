@@ -10,7 +10,6 @@ DIRECTORIES
 Bash
 Linux, Debian to be precise, scripts that should be run only if the code has been reviewed and is compatible with your system. A varying degree of manual editing is also needed to get these working, i.e. server URLs.
 
-Win32
-I named this Batch, but it was too similar to Bash. These are Batch scripts that interact with the Windows shell. They're simple and probably won't be further developed.
+Batch
+These are Batch scripts that interact with the Windows shell. They're simple and ready to use. They probably won't be further developed.
 
-More to come!

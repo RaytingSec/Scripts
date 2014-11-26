@@ -1,0 +1,92 @@
+#!/bin/bash
+# Backup of user files for specified program
+# Requires sudo to copy/delete program files and backups
+
+# TODO:
+# test to confirm working
+# complete pending program selection code
+
+
+# Static variables
+DATE=$(date +"%Y.%m.%d")
+PATH_BKUP=~/backup
+PATH_PRG=prg
+# Program info
+PROGRAMS=
+{
+    apache2
+    ssh
+    fail2ban
+}
+APACHE_FILES=
+(
+    /etc/$PROGRAM/
+    /var/www/
+)
+SSH_FILES=
+(
+    /etc/$PROGRAM/
+    /etc/sshd/
+    ~/.ssh/etc/motd
+    /etc/issue
+    /etc/issue.net
+)
+FAIL2BAN_FILES=
+(
+    /etc/$PROGRAM/
+)
+
+# Start
+echo "Enter a number:\n1. apache2\n2. ssh\n3. fail2ban"
+
+#Choose PROGRAMS array element accordingly
+#PROGRAM=someArrayElement
+#Decide which FILES array to use
+#Determine array size
+#ARRAY_SIZE=${#BACKUP[@]}
+TAR=$PROGRAM_$DATE.tar.gz
+
+# Ensure path exists
+# main backup path
+if [ ! -d $PATH_BKUP ];
+then
+   echo -e "WARNING! Main backup directory does not exist!"
+   mkdir $PATH_BKUP
+fi
+# programs directory
+if [ ! -d $PATH_BKUP/$PATH_PRG ]
+then
+   mkdir $PATH_BKUP/$PATH_PRG
+fi
+# temporary directory
+if [ ! -d "$PATH_BKUP/$PATH_PRG/$DATE" ];
+then
+   mkdir $PATH_BKUP/$PATH_PRG/$DATE
+else
+   sudo -E rm -r $PATH_BKUP/$PATH_PRG/$DATE
+   echo -e "Deleted existing directory"
+fi
+
+# Backup files
+# Loop through path array
+let "i=0"
+while [ $i -ne $ARRAY_SIZE ]; do
+    sudo -E cp -a ${BACKUP[$i]} $PATH_BKUP/$PATH_PRG/$DATE
+    let "i++"
+done
+
+# Compress to tarball
+cd $PATH_BKUP/$PROGRAM
+# if tarball exists
+if [ -d "$TAR" ]
+then
+   rm $TAR
+   echo -e "Deleted existing tar"
+fi
+# create tarball
+sudo -E tar -cpzf $PATH_BKUP/$PATH_PRG/$TAR
+sudo -E rm -r $PATH_BKUP/$PATH_PRG/$DATE
+
+# Done
+echo -e "Backed up to: $PATH_BKUP/$PATH_PRG/$TAR"
+
