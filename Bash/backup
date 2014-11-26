@@ -37,7 +37,7 @@ FAIL2BAN_FILES=
 )
 
 # Start
-echo "Enter a number:\n1. apache2\n2. ssh\n3. fail2ban"
+printf "Enter a number:\n1. apache2\n2. ssh\n3. fail2ban"
 
 #Choose PROGRAMS array element accordingly
 #PROGRAM=someArrayElement
