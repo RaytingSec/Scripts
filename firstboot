@@ -1,0 +1,116 @@
+#! /bin/sh/
+
+# Debian first boot setup script
+
+# Installs the following packages
+# Utilities:
+# nmap, vim, gparted, cpufrequtils, hydra
+# Other software:
+# sublime, dropbox, deluged
+# Debian drivers:
+# firmware-iwlwifi
+
+# Static variables
+#DATE=$(date +"%Y.%m.%d")
+SERVER_URL=raydarnet.info.tm
+SERVER_PORT=22
+SERVER_USER=rayting
+BACKUP_DIR=~/backup/firstboot/
+
+# Methods
+# Update
+function Update
+{
+
+    printf "\nUpdating...\n"
+    sleep 3
+
+	# Update and notify only if errors occur
+	sudo apt-get update -qq
+	# Upgrade and automatically accept
+	sudo apt-get upgrade -qq -y
+}
+
+# Debian Drivers
+function DebDrivers
+{
+    printf "\nInstall Debian drivers\n"
+    sleep 3
+    
+    # Backup sources
+    cp /etc/apt/sources.list $BACKUP_DIR
+    
+    # Add repos
+    echo "
+    deb http://ftp.de.debian.org/debian/ jessie main non-free contrib
+	# deb-src http://ftp.de.debian.org/debian/ jessie main non-free contrib
+
+	deb http://security.debian.org/ jessie/updates main contrib non-free
+	# deb-src http://security.debian.org/ jessie/updates main contrib non-free
+	" >> /etc/apt/sources.list
+    
+    # apt-get operations
+    Update
+    
+    printf "\nInstalling driver...\n"
+    sleep 3
+    sudo apt-get firmware-iwlwifi firmware-realtek
+}
+
+# Server Interactions
+function GetFiles
+{
+	#Get remote file
+    scp $SERVER_USER@$SERVER_URL:bin ~/ -r -p $SERVER_PORT
+	#Compare files
+	Compare
+	#If local had any new files
+		#upload the folder
+	#If remote had new files
+		#replace local dir
+	#Upload dir with newest files
+}
+function Compare
+{
+	#Compare the files
+	cp -u src dst
+}
+
+#################################################
+printf "\nCreating dirs and retreiving files\n"
+sleep 3
+
+# Create dirs
+mkdir ~/backup
+# bin created automatically from scp
+#mkdir ~/bin
+
+# Retrieve files for bin
+scp $SERVER_USER@$SERVER_URL:bin ~/ -r -p $SERVER_PORT
+
+#GetFiles
+
+#################################################
+printf "\nAdding new repos\n"
+sleep 3
+
+# Sublime repo
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-add-repository "deb http://linux.dropbox.com/ubuntu $(lsb_release -cs) main"
+
+# Update and upgrade apt-get
+Update
+# Could call update script
+#bash ~/bin/update
+
+#################################################
+printf "\nCreating dirs and retreiving files\n"
+sleep 3
+
+# Proceed to packages
+sudo apt-get install nmap vim cpufrequtils gparted hydra
+sudo apt-get install sublime-text-installer nautilus-dropbox deluge
+
+#################################################
+# Install drivers for Debian systems
+DebDrivers

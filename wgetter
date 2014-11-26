@@ -1,0 +1,36 @@
+#!/bin/bash
+# Multiple file series retriever
+
+# Example:
+# http://someURL.com/directory/file-part-1.zip
+# http://someURL.com/directory/file-part-2.zip
+# ...
+# http://someURL.com/directory/file-part-9.zip
+
+# also pass in the parameters 1 and 9 like so:
+# bash wgetter 1 9
+
+# Static Variables
+# Where downloads go
+DIR=~/wgetDownloads
+# URL of target, excluding file name
+URL_CONTENT="http://someURL.com/directory/"
+# Parts of file name
+NAME_START="file-part-"
+NAME_END=".zip"
+
+# Get range to download from input parameters
+START=$1
+END=$2
+let "CURRENT=$START"
+# Go through each file to download
+while [ $CURRENT -le $END ]; do
+    # Get complete file name
+    TITLE=$NAME_START$CURRENT$NAME_END
+    # Get complete URL for downloading
+    URL_FULL=$URL_CONTENT$TITLE
+    wget $URL_FULL -P $DIR &
+    # Inform of start
+    echo "Started job for $TITLE"
+    let "CURRENT++"
+done
