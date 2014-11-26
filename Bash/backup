@@ -4,7 +4,7 @@
 
 # TODO:
 # test to confirm working
-# complete pending program selection code
+# implement 2d array instead of case
 
 
 # Static variables
@@ -37,35 +37,41 @@ FAIL2BAN_FILES=
 )
 
 # Start
+# Get Input
 printf "Enter a number:\n1. apache2\n2. ssh\n3. fail2ban"
-
-#Choose PROGRAMS array element accordingly
-#PROGRAM=someArrayElement
-#Decide which FILES array to use
-#Determine array size
-#ARRAY_SIZE=${#BACKUP[@]}
+read INDEX
+# Determine selected program
+PROGRAM=${PROGRAMS[$INDEX]}
+# Decide which FILES array to use
+case $INDEX in
+    1)
+        BACKUP=$APACHE_FILES
+        ;;
+    2)
+        BACKUP=$SSH_FILES
+        ;;
+    3)
+        BACKUP=$FAIL2BAN_FILES
+        ;;
+    *)
+        echo "Error: '$OPTION' not a known program"
+        exit
+        ;;
+esac
+# Array size
+ARRAY_SIZE=${#BACKUP[@]}
+# Tar name
 TAR=$PROGRAM_$DATE.tar.gz
 
 # Ensure path exists
-# main backup path
-if [ ! -d $PATH_BKUP ];
+# Delete any existing temp backup
+if [ -d "$PATH_BKUP/$PATH_PRG/$DATE" ];
 then
-   echo -e "WARNING! Main backup directory does not exist!"
-   mkdir $PATH_BKUP
-fi
-# programs directory
-if [ ! -d $PATH_BKUP/$PATH_PRG ]
-then
-   mkdir $PATH_BKUP/$PATH_PRG
-fi
-# temporary directory
-if [ ! -d "$PATH_BKUP/$PATH_PRG/$DATE" ];
-then
-   mkdir $PATH_BKUP/$PATH_PRG/$DATE
-else
    sudo -E rm -r $PATH_BKUP/$PATH_PRG/$DATE
    echo -e "Deleted existing directory"
 fi
+# Create temp backup
+mkdir -p $PATH_BKUP/$PATH_PRG/$DATE
 
 # Backup files
 # Loop through path array
