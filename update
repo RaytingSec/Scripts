@@ -1,6 +1,0 @@
-#!/bin/bash
-# Simple script to update packages on machine
-
-sudo apt-get update -qq
-sudo apt-get upgrade -y
-
