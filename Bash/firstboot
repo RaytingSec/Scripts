@@ -1,17 +1,19 @@
 #! /bin/sh/
-
-# Debian first boot setup script
-
+# Debian first boot setup script. Fill in version numbers before use.
+#
 # Installs the following packages
 # Utilities:
-# nmap, vim, gparted, cpufrequtils, hydra
+#   nmap, vim, cpufrequtils, gparted, hydra
 # Other software:
-# sublime, dropbox, deluged
+#   sublime, dropbox, qbittorrent, VMware
 # Debian drivers:
-# firmware-iwlwifi
+#   firmware-iwlwifi
+# Java:
+#   icedtea-7-plugin
+# Programming:
+#   openjdk-7-jdk, IntelliJ, Android Studio
 
 # Static variables
-#DATE=$(date +"%Y.%m.%d")
 SERVER_URL=raydarnet.info.tm
 SERVER_PORT=22
 SERVER_USER=null # Assumed that server user has same name
@@ -90,11 +92,24 @@ sleep 3
 
 # Proceed to packages
 sudo apt-get install nmap vim cpufrequtils gparted hydra
-sudo apt-get install sublime-text-installer nautilus-dropbox deluge
+sudo apt-get install sublime-text-installer nautilus-dropbox qbittorrent
 
 # Install VMware
-#sh VMwarefile.bundle
+# Fill in version number before use
+#sudo sh VMware-Workstation-xxxxx-xxxxx.x86_64.bundle
+
+# Java
+sudo apt-get install icedtea-7-plugin
+
+# Programming
+sudo apt-get install openjdk-7-jdk
+# Get remote files
+scp $SERVER_URL:/someDirectory/ ~/ -r -p $SERVER_PORT
+# Extract intellij, android-studio, fill in version number before use
+#tar -xzf ~/idealC-xxxxx.tar.gz
+#tar -xzf ~/android-studio-ide-xxxxx-linux.zip
 
 #################################################
 # Install drivers for Debian systems
 DebDrivers
+

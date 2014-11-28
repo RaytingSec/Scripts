@@ -8,14 +8,18 @@ Bash scripts intended to run on Debian. They were specifically written for my ma
 SCRIPTS
 
 update:  
-Simple script that automates the apt-get update and upgrade command. Should be fully working "out of the box".
+Simple script that automates the apt-get update and upgrade command. Should be fully working "out of the box". It has three output levels:
+Silent: no output except update errors and will not ask for upgrade permission
+Verbose: outputs everything and asks for upgrade permission
+Default: a mix of the two, outputs update errors and upgrade information but does NOT ask for upgrade permission
+The script file also contains these details, but reading the few lines of script itself also tells you everything.
 
 backup:  
 Currently broken and will be fixed!
 Takes predefined directories and files and compresses into a timestamped tar. It comes preloaded to backup most files for apache2, fail2ban, and openssh. 
 
 firstboot:  
-Automates setting up a new Linux machine. Check contents and know what you're doing before running this yourself. Not fully tested.
+Automates setting up a new Linux machine. Check contents and know what you're doing before running this yourself. You will need to manually input version numbers into the script file. Not fully tested.
 
 raydartools:  
 Common commands I use with my server. Not actually very practical, but saves some finger movement and memorization.
