@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Note that esac signals the end of a case block.
+
+# Example of a case script
+# note that in this case, only variable name $1 is acceptable
+case $1 in
+1)	echo "case 1";;
+2)	echo "case 2";;
+abc)	echo "string case";;
+*)	echo "unknown input $1";;
+esac
+
+# A second case script
+# note that now a more descriptive variable name can be used
+echo -e "Enter a number between 1 and 10."
+read NUM
+case $NUM in
+	1) echo "one" ;;
+	2) echo "two" ;;
+	3) echo "three" ;;
+	4) echo "four" ;;
+	5) echo "five" ;;
+	6) echo "six" ;;
+	7) echo "seven" ;;
+	8) echo "eight" ;;
+	9) echo "nine" ;;
+	10) echo "ten" ;;
+	*) echo "INVALID NUMBER!" ;;
+esac

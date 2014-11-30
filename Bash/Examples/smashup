@@ -1,0 +1,15 @@
+#!/bin/bash
+# Example script using various things
+
+# output to user and reading input
+echo -e "Enter something: "
+read userInput
+echo "This is what I got: $userInput"
+
+# if else statement
+if [ "$userInput" = "1" ]
+then
+    echo "case 1"
+else
+    echo "else case"
+fi

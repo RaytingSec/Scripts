@@ -1,0 +1,6 @@
+#!/bin/bash
+# Example that uses: variables, user io
+echo -e "Please enter your name: "
+read name
+echo "Nice to meet you $name"
+
