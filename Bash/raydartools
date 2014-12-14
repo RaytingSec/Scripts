@@ -29,6 +29,7 @@ function ListText
     echo "13: Nmap"
     echo "14: Server service control"
     echo "15: CPU governer"
+    echo "16: Mount second hdd"
     echo "20s - SSH"
     echo "21: SSH"
     echo "29: SSH using custom port"
@@ -72,6 +73,9 @@ case $OPTION in
             sudo cpufreq-set -g $GOV -c $i
             let "i++"
         done
+        ;;
+    16)
+        sudo mount /dev/sdc1 /mnt/1
         ;;
     # SSH
     21)
