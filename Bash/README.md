@@ -21,6 +21,9 @@ Takes predefined directories and files and compresses into a timestamped tar. It
 firstboot:  
 Automates setting up a new Linux machine. Check contents and know what you're doing before running this yourself. You will need to manually input version numbers into the script file. Not fully tested.
 
+flood:
+A fun script that covers the screen in 0s and 1s, inspired by the "matrix" effect.
+
 raydartools:  
 Common commands I use with my server. Not actually very practical, but saves some finger movement and memorization.
 

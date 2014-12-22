@@ -3,7 +3,7 @@
 #
 # Installs the following packages
 # Utilities:
-#   nmap, vim, cpufrequtils, gparted, hydra
+#   nmap, tree, vim, cpufrequtils, gparted, hydra
 # Other software:
 #   sublime, dropbox, qbittorrent, VMware, firefox
 # Debian drivers:
@@ -59,7 +59,7 @@ function DebDrivers
     sudo apt-get firmware-iwlwifi firmware-realtek
 }
 
-#################################################
+###################
 printf "\nCreating dirs and retreiving files\n"
 sleep 3
 
@@ -73,7 +73,7 @@ scp $SERVER_URL:bin ~/ -r -p $SERVER_PORT
 
 #GetFiles
 
-#################################################
+###################
 printf "\nAdding new repos\n"
 sleep 3
 
@@ -86,12 +86,12 @@ Update
 # Could call update script
 #bash ~/bin/update
 
-#################################################
+###################
 printf "\nCreating dirs and retreiving files\n"
 sleep 3
 
 # Proceed to packages
-sudo apt-get install nmap vim cpufrequtils gparted hydra
+sudo apt-get install nmap tree vim cpufrequtils gparted hydra
 sudo apt-get install sublime-text nautilus-dropbox qbittorrent
 
 # Install VMware
@@ -124,7 +124,7 @@ scp $SERVER_URL:/someDirectory/ ~/ -r -p $SERVER_PORT
 tar -xzf ~/idealC-xxxxx.tar.gz
 tar -xzf ~/android-studio-ide-xxxxx-linux.zip
 
-#################################################
+###################
 # Install drivers for Debian systems
 DebDrivers
 

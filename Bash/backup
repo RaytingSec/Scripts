@@ -17,6 +17,7 @@ PROGRAMS=
     apache2
     ssh
     fail2ban
+    vim
 }
 APACHE_FILES=
 (
@@ -34,6 +35,10 @@ SSH_FILES=
 FAIL2BAN_FILES=
 (
     /etc/$PROGRAM/
+)
+VIM_FILES=
+(
+    ~/.vimrc
 )
 
 # Start
@@ -53,6 +58,8 @@ case $INDEX in
     3)
         BACKUP=$FAIL2BAN_FILES
         ;;
+    4)
+        BACKUP=$VIM_FILES
     *)
         echo "Error: '$OPTION' not a known program"
         exit
@@ -91,6 +98,7 @@ then
 fi
 # create tarball
 sudo -E tar -cpzf $PATH_BKUP/$PATH_PRG/$TAR
+# remove temp backup
 sudo -E rm -r $PATH_BKUP/$PATH_PRG/$DATE
 
 # Done
