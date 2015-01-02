@@ -1,0 +1,26 @@
+#! /bin/sh
+
+# Install VMware Tools
+
+CDROM=/dev/cdrom
+MOUNTPATH=/mnt/cdrom
+WORKPATH=/tmp/vmt
+VMDIR=/vmware-tools-distrib
+INSTALLSCRIPT=vmware-install.pl
+
+# Get files
+sudo mkdir -p $MOUNTPATH
+sudo mkdir -p $WORKPATH
+sudo mount $CDROM $MOUNTPATH
+cd $MOUNTPATH
+TarBall=*.tar.gz
+cp $MOUNTPATH/$TarBall $WORKPATH
+sudo tar -xzf $TarBall --directory $WORKPATH
+# install
+sudo $WORKPATH$VMDIR/$INSTALLSCRIPT
+# cleanup commands
+echo "cleaning up"
+sleep 3
+sudo rm -r $WORKPATH
+sleep 1
+sudo umount -l $CDROM
