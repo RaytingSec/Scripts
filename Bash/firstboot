@@ -167,7 +167,7 @@ cpufrequtils
 
 gpart gparted sublime-text-installer atom synaptic 
 
-nautilus-dropbox vlc
+nautilus-dropbox vlc keepass2
 
 oracle-java8-installer oracle-java8-set-default icedtea-7-plugin flashplugin-installer
 
@@ -175,6 +175,7 @@ oracle-java8-installer oracle-java8-set-default icedtea-7-plugin flashplugin-ins
 
 
 sudo add-apt-repository ppa:webupd8team/atom
+sudo apt-add-repository ppa:jtaylor/keepass
 
 
 # Outline
