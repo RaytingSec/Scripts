@@ -1,15 +1,14 @@
-Shell-Scripts
-============
+# Shell-Scripts
 
-DESCRIPTION
+### DESCRIPTION
 
 This repository has scripts for both Windows and Linux systems. They are primarily to automate, streamline, and assist with tasks on my machines.
 
-DIRECTORIES
+### DIRECTORIES
 
-Bash:  
-Linux, Debian to be precise, scripts that should be run only if the code has been reviewed and is compatible with your system. A varying degree of manual editing is also needed to get these working, i.e. server URLs.
+**Bash**
+Linux Bash scripts with a varying degree of usability. Some work, some don't. Review code before using
 
-Batch:  
-These are Batch scripts that interact with the Windows shell. They're simple and ready to use. They probably won't be further developed.
+**DOS**
+Batch scripts that run on the MS-DOS shell. They're simple and ready to use. They probably won't be further developed.
 

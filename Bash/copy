@@ -1,0 +1,8 @@
+#! /bin/sh/
+
+# Copies data to a restricted directory
+
+SRC=~/bin/html/raydarnet
+DST=/var/www/
+
+sudo -H cp -rf $SRC/. $DST

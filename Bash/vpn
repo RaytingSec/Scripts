@@ -1,0 +1,9 @@
+#!/bin/sh
+# Initiates VPN connection
+
+path=/etc/openvpn
+config=vpnht-us.ovpn
+login=login.conf
+
+sudo openvpn --config $path/$config --auth-user-pass $path/$login
+

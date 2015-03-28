@@ -8,88 +8,124 @@
 
 
 # Static variables
-DATE=$(date +"%Y.%m.%d")
+DATE=$(date +"%Y-%m-%d")
 PATH_BKUP=~/backup
-PATH_PRG=prg
+PATH_PRG=/prg
+PATH_TEMP=/temp
 # Program info
-PROGRAMS=
-{
-    apache2
-    ssh
-    fail2ban
-    vim
-}
-APACHE_FILES=
-(
-    /etc/$PROGRAM/
-    /var/www/
+PROGRAMS=(
+   'apache2'
+   'bash'
+   'fail2ban'
+   'mozilla'
+   'ssh'
+   'vim'
 )
-SSH_FILES=
-(
-    /etc/$PROGRAM/
-    /etc/sshd/
-    ~/.ssh/etc/motd
-    /etc/issue
-    /etc/issue.net
+APACHE_FILES=(
+   /etc/apache2
+   /var/www
 )
-FAIL2BAN_FILES=
-(
-    /etc/$PROGRAM/
+BASH_FILES=(
+   ~/.bashrc
+   ~/.bash_history
 )
-VIM_FILES=
-(
-    ~/.vimrc
+FAIL2BAN_FILES=(
+   /etc/fail2ban
+)
+MOZILLA_FILES=(
+   ~/.cache/mozilla
+   ~/.mozilla
+)
+SSH_FILES=(
+   ~/.ssh
+   /etc/ssh
+   /etc/sshd
+   /etc/motd
+   /etc/issue
+   /etc/issue.net
+)
+VIM_FILES=(
+   ~/.viminfo
+   ~/.vimrc
 )
 
 # Start
+
 # Get Input
-printf "Enter a number:\n1. apache2\n2. ssh\n3. fail2ban"
+echo "Enter a number:"
+# Print all programs
+ARRAY_SIZE=${#PROGRAMS[@]}
+let "i=0"
+while [ $i -ne $ARRAY_SIZE ]; do
+   j=$i'. '
+   j+=${PROGRAMS[$i]}
+   echo $j
+   let "i++"
+done
 read INDEX
+
 # Determine selected program
 PROGRAM=${PROGRAMS[$INDEX]}
 # Decide which FILES array to use
 case $INDEX in
-    1)
-        BACKUP=$APACHE_FILES
-        ;;
-    2)
-        BACKUP=$SSH_FILES
-        ;;
-    3)
-        BACKUP=$FAIL2BAN_FILES
-        ;;
-    4)
-        BACKUP=$VIM_FILES
-    *)
-        echo "Error: '$OPTION' not a known program"
-        exit
-        ;;
+   0)
+      BACKUP=$APACHE_FILES
+      ;;
+   1)
+      BACKUP=$BASH_FILES
+      ;;
+   2)
+      BACKUP=$FAIL2BAN_FILES
+      ;;
+   3)
+      BACKUP=$MOZILLA_FILES
+      ;;
+   4)
+      BACKUP=$SSH_FILES
+      ;;
+   5)
+      BACKUP=$VIM_FILES
+      ;;
+   *)
+      echo "Error: '$INDEX' not a known program"
+      exit
+      ;;
 esac
 # Array size
 ARRAY_SIZE=${#BACKUP[@]}
-# Tar name
-TAR=$PROGRAM_$DATE.tar.gz
+# Create vars
+TAR=$PROGRAM
+TAR+='_'
+TAR+=$DATE.tar.gz
+PATH_START=$PATH_BKUP$PATH_TEMP/$PROGRAM
+PATH_END=$PATH_BKUP$PATH_PRG
+
+echo $PATH_START
+echo $PATH_END
 
 # Ensure path exists
 # Delete any existing temp backup
-if [ -d "$PATH_BKUP/$PATH_PRG/$DATE" ];
+print $PATH_START
+if [ -d "$PATH_START" ];
 then
-   sudo -E rm -r $PATH_BKUP/$PATH_PRG/$DATE
+   sudo -E rm -r $PATH_START
    echo -e "Deleted existing directory"
 fi
-# Create temp backup
-mkdir -p $PATH_BKUP/$PATH_PRG/$DATE
+# Create dirs
+mkdir -p $PATH_START
+mkdir -p $PATH_END
 
 # Backup files
 # Loop through path array
 let "i=0"
+let "ARRAY_SIZE++"
 while [ $i -ne $ARRAY_SIZE ]; do
-    sudo -E cp -a ${BACKUP[$i]} $PATH_BKUP/$PATH_PRG/$DATE
-    let "i++"
+   sudo -E cp -r -a ${BACKUP[$i]} $PATH_START
+   let "i++"
 done
 
 # Compress to tarball
-cd $PATH_BKUP/$PROGRAM
+cd $PATH_BKUP$PATH_START
 # if tarball exists
 if [ -d "$TAR" ]
 then
@@ -97,10 +133,9 @@ then
    echo -e "Deleted existing tar"
 fi
 # create tarball
-sudo -E tar -cpzf $PATH_BKUP/$PATH_PRG/$TAR
+sudo -E tar cpzf $PATH_END/$TAR $PROGRAM
 # remove temp backup
-sudo -E rm -r $PATH_BKUP/$PATH_PRG/$DATE
+#sudo -E rm -r $PATH_START
 
 # Done
-echo -e "Backed up to: $PATH_BKUP/$PATH_PRG/$TAR"
-
+echo -e "Backed up to: $PATH_BKUP$PATH_PRG/$TAR"

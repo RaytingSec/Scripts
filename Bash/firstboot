@@ -3,7 +3,7 @@
 #
 # Installs the following packages
 # Utilities:
-#   nmap, tree, vim, cpufrequtils, gparted, hydra
+#   nmap, tree, vim, cpufrequtils, gparted, hydra, git, hping3
 # Other software:
 #   sublime, dropbox, qbittorrent, VMware, firefox
 # Debian drivers:
@@ -12,6 +12,10 @@
 #   icedtea-7-plugin
 # Programming:
 #   openjdk-7-jdk, IntelliJ, Android Studio
+
+# Linux Mint:
+sudo apt-get install nmap tree vim cpufrequtils gparted hydra openjdk-7-jdk
+sudo apt-get install sublime-text
 
 # Static variables
 SERVER_URL=raydarnet.info.tm
@@ -63,15 +67,9 @@ function DebDrivers
 printf "\nCreating dirs and retreiving files\n"
 sleep 3
 
-# Create dirs
 mkdir ~/backup
-# bin created automatically from scp
 #mkdir ~/bin
-
-# Retrieve files for bin
 scp $SERVER_URL:bin ~/ -r -p $SERVER_PORT
-
-#GetFiles
 
 ###################
 printf "\nAdding new repos\n"
@@ -81,7 +79,6 @@ sleep 3
 sudo add-apt-repository ppa:webupd8team/sublime-text-3
 sudo apt-add-repository "deb http://linux.dropbox.com/ubuntu $(lsb_release -cs) main"
 
-# Update and upgrade apt-get
 Update
 # Could call update script
 #bash ~/bin/update
@@ -91,8 +88,8 @@ printf "\nCreating dirs and retreiving files\n"
 sleep 3
 
 # Proceed to packages
-sudo apt-get install nmap tree vim cpufrequtils gparted hydra
-sudo apt-get install sublime-text nautilus-dropbox qbittorrent
+sudo apt-get install nmap tree vim cpufrequtils gparted hydra git hping3
+sudo apt-get install sublime-text-installer nautilus-dropbox qbittorrent
 
 # Install VMware
 # Fill in version number before use
@@ -127,4 +124,69 @@ tar -xzf ~/android-studio-ide-xxxxx-linux.zip
 ###################
 # Install drivers for Debian systems
 DebDrivers
+
+
+
+# tmp
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update 
+sudo apt-get install tree vim hydra traceroute nmap hping3 cpufrequtils gpart gparted git openjdk-7-jdk nautilus-dropbox sublime-text-installer vlc synaptic icedtea-7-plugin unity-tweak-tool flashplugin-installer
+
+#Ubuntu gnome vm
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update 
+sudo apt-get install tree vim hydra traceroute nmap hping3 gpart gparted git openjdk-7-jdk nautilus-dropbox sublime-text-installer vlc synaptic icedtea-7-plugin flashplugin-installer
+
+# Mint VM
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update 
+sudo apt-get install tree vim hydra traceroute nmap hping3 gpart gparted git openjdk-7-jdk nautilus-dropbox sublime-text-installer vlc synaptic icedtea-7-plugin flashplugin-installer
+
+# Ubuntu Gnome Host
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update 
+sudo apt-get install tree vim hydra traceroute nmap hping3 cpufrequtils gpart gparted git openjdk-7-jdk nautilus-dropbox sublime-text-installer vlc synaptic icedtea-7-plugin flashplugin-installer
+
+sudo add-apt-repository ppa:tsvetko.tsvetkov/cinnamon
+sudo apt-get update
+sudo apt-get install cinnamon cinnamon-themes mint-backgrounds* nemo-dropbox mint-x-icons mint-themes cinnamon-session
+
+# Java official
+
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+
+# All packages
+
+sudo apt-get install
+
+tree vim hydra traceroute nmap hping3 git fortune cowsay
+
+cpufrequtils
+
+gpart gparted sublime-text-installer atom synaptic 
+
+nautilus-dropbox vlc
+
+oracle-java8-installer oracle-java8-set-default icedtea-7-plugin flashplugin-installer
+
+#openjdk-7-jdk+
+
+
+sudo add-apt-repository ppa:webupd8team/atom
+
+
+# Outline
+#   scp scripts
+#   add repos
+#   update/upgrade
+#   install packages
+#   create links
+#   extract eclipse
+#   install chrome
+
+ln -s /mnt/hgfs/C/Users/Rayting/Dropbox ~/Dropbox
+ln -s ~/Dropbox/Code/ ~/code
+ln -s ~/Dropbox/Code/Shell-Scripts/Bash/ ~/bin
 

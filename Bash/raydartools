@@ -8,100 +8,128 @@ USER=null # Assumed that server user has same name
 SSH_PORT=22
 SOCKS_PORT=6010
 PROGRAMS=(
-          ssh
-          fail2ban
-          apache2
-          bind9
-         )
+    ssh
+    fail2ban
+    apache2
+    bind9
+)
 ARRAY_SIZE=${#PROGRAMS[@]}
 
 # Functions
 function HelpText
 {
-    echo "Tool kit for predefined server and user."
-    ListText
+   echo "Tool kit for predefined server and user."
+   ListText
 }
 function ListText
 {
-    echo "10s - General"
-    echo "11: Ping test"
-    echo "12: Trace route"
-    echo "13: Nmap"
-    echo "14: Server service control"
-    echo "15: CPU governer"
-    echo "16: Mount second hdd"
-    echo "20s - SSH"
-    echo "21: SSH"
-    echo "29: SSH using custom port"
-    echo "30s - Proxy"
-    echo "31: SOCKS Proxy over SSH"
-    echo "39: Proxy using custom port"
-    echo "help: shows this text"
-    echo "list: list of all commands"
+   echo "10s - General"
+   echo "11: Ping test"
+   echo "12: Trace route"
+   echo "13: Nmap"
+   echo "14: Server service control"
+   echo "15: CPU governer"
+   echo "16: Mount second hdd"
+   echo "20s - SSH"
+   echo "21: SSH"
+   echo "29: SSH using custom port"
+   echo "30s - Proxy"
+   echo "31: SOCKS Proxy over SSH"
+   echo "39: Proxy using custom port"
+   echo "40s - fail2ban IP Management"
+   echo "41: List IPs"
+   echo "42: Unban IP from SSH"
+   echo "42: Unban IP from specified program"
+   echo "help: shows this text"
+   echo "list: list of all commands"
 }
 
 # Program
 ListText
-read OPTION
-case $OPTION in
-    # General
-    11)
-        ping $URL -c 5
-        ;;
-    12)
-        traceroute $URL
-        ;;
-    13)
-        nmap $URL
-        ;;
-    14)
-        printf "Command: "
-        read COMMAND
-        let "i=0"
-        while [ $i -ne $ARRAY_SIZE ]; do
+
+while [ $INPUT != "exit" ]; do
+   read OPTION
+   case $OPTION in
+      # General
+      11)
+         ping $URL -c 5
+         ;;
+      12)
+         traceroute $URL
+         ;;
+      13)
+         nmap $URL
+         ;;
+      14)
+         printf "Command: "
+         read COMMAND
+         let "i=0"
+         while [ $i -ne $ARRAY_SIZE ]; do
             sudo service ${PROGRAMS[$i]} $COMMAND
             let "i++"
-        done
-        ;;
-    15)
-        printf "Governer: "
-        read GOV
-        printf "Cores: "
-        read CORES
-        let "i=0"
-        while [ $i -ne $CORES ]; do
+         done
+         ;;
+      15)
+         printf "Governer: "
+         read GOV
+         printf "Cores: "
+         read CORES
+         let "i=0"
+         while [ $i -ne $CORES ]; do
             sudo cpufreq-set -g $GOV -c $i
             let "i++"
-        done
-        ;;
-    16)
-        sudo mount /dev/sdc1 /mnt/1
-        ;;
-    # SSH
-    21)
-        ssh $URL -p $SSH_PORT
-        ;;
-    29)
-        read port
-        ssh $URL -p $port
-        ;;
-    # SOCKS Proxy
-    31)
-        ssh $URL -D $SOCKS_PORT
-        ;;
-    39)
-        read port
-        ssh $URL -D $port
-        ;;
-    # Information
-    help)
-        HelpText
-        ;;
-    list)
-        ListText
-        ;;
-    *)
-        echo "Error: '$OPTION' not recognized. Try using 'help'."
-        ;;
-esac
-
+         done
+         ;;
+      16)
+         sudo mount /dev/sdc1 /mnt/1
+         ;;
+      # SSH
+      21)
+         ssh $URL -p $SSH_PORT
+         ;;
+      29)
+         printf "Port: "
+         read port
+         ssh $URL -p $port
+         ;;
+      # SOCKS Proxy
+      31)
+         ssh $URL -D $SOCKS_PORT
+         ;;
+      39)
+         printf "Port: "
+         read port
+         ssh $URL -D $port
+         ;;
+      # IP Bans and Management
+      41)
+         sudo iptables -L -n
+         ;;
+      42)
+         printf "Banned IP: "
+         read BANNED
+         let "i=0"
+         sudo iptables -D fail2ban-ssh -s $BAN -j DROP
+         ;;
+      43)
+         printf "Program: "
+         read PROG
+         printf "Banned IP: "
+         read BANNED
+         sudo iptables -D fail2ban-ssh -s $BAN -j DROP
+         ;;
+      # Information
+      help)
+         HelpText
+         ;;
+      list)
+         ListText
+         ;;
+      exit)
+         exit
+         ;;
+      *)
+         echo "Error: '$OPTION' not recognized. Try using 'help'."
+         ;;
+   esac
+done
