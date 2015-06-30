@@ -2,8 +2,10 @@
 # Initiates VPN connection
 
 path=/etc/openvpn
-config=vpnht-us.ovpn
-login=login.conf
+config=vpnht-64.ovpn
+login=login
 
 sudo openvpn --config $path/$config --auth-user-pass $path/$login
-
+# sudo echo "nameserver 8.8.8.8
+# nameserver 8.8.4.4
+# " >> /etc/resolv.conf 

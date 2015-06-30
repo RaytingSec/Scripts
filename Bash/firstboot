@@ -1,3 +1,4 @@
+
 #! /bin/sh/
 # Debian first boot setup script. Fill in version numbers before use.
 #
@@ -18,7 +19,7 @@ sudo apt-get install nmap tree vim cpufrequtils gparted hydra openjdk-7-jdk
 sudo apt-get install sublime-text
 
 # Static variables
-SERVER_URL=raydarnet.info.tm
+SERVER_URL=example.com
 SERVER_PORT=22
 SERVER_USER=null # Assumed that server user has same name
 BACKUP_DIR=~/backup/firstboot/
@@ -159,23 +160,36 @@ sudo apt-get install oracle-java8-installer
 
 # All packages
 
+# Debian: first do
+# sudo apt-get install software-properties-common python-software-properties
+
 sudo apt-get install
 
-tree vim hydra traceroute nmap hping3 git fortune cowsay
+tree vim hydra traceroute nmap hping3 git fortune cowsay htop atop openvpn lynx-cur
 
 cpufrequtils
 
-gpart gparted sublime-text-installer atom synaptic 
+gpart gparted sublime-text-installer sqlitebrowser synaptic atom
 
-nautilus-dropbox vlc keepass2
+nautilus-dropbox vlc keepass2 xchat
 
 oracle-java8-installer oracle-java8-set-default icedtea-7-plugin flashplugin-installer
 
+# Ubuntu
+unity-tweak-tool gnome-color-chooser
+
+# XFCE
+thunar-dropbox-plugin
+
+# Debian
+Firefox
+
 #openjdk-7-jdk+
-
-
-sudo add-apt-repository ppa:webupd8team/atom
-sudo apt-add-repository ppa:jtaylor/keepass
+# Java repos
+sudo add-apt-repository -y --remove ppa:webupd8team/sublime-text-3
+sudo add-apt-repository -y --remove ppa:webupd8team/atom
+sudo apt-add-repository -y --remove ppa:jtaylor/keepass
+sudo add-apt-repository -y --remove ppa:webupd8team/java
 
 
 # Outline
@@ -187,7 +201,7 @@ sudo apt-add-repository ppa:jtaylor/keepass
 #   extract eclipse
 #   install chrome
 
-ln -s /mnt/hgfs/C/Users/Rayting/Dropbox ~/Dropbox
+ln -s /data/Dropbox ~/Dropbox
 ln -s ~/Dropbox/Code/ ~/code
 ln -s ~/Dropbox/Code/Shell-Scripts/Bash/ ~/bin
 

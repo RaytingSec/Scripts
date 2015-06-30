@@ -1,0 +1,10 @@
+#!/bin/bash
+# Appends login info to specified file, where arg1 is level, arg2 is password,
+# and arg3 is file. Used for tracking ssh logins for bandit wargame.
+
+if [ "$1" == '--help' ]; then # help text
+    echo "Appends wargame login info to specified file, where arg1 is level,"
+    echo "arg2 is password, and arg3 is file"
+else
+    printf "\nbandit$1@bandit.labs.overthewire.org\n$2\n" >> $3
+fi

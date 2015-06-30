@@ -1,0 +1,5 @@
+#!/bin/sh
+# Launch new Firefox instance using argument as profile name
+
+firefox -P $1 --no-remote
+
