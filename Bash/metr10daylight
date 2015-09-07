@@ -9,5 +9,5 @@ DAY=$2
 URL_CONTENT='http://www.wunderground.com/history/airport/PABR/2014/'$MONTH'/'$DAY'/DailyHistory.html?req_city=Barrow&req_state=AK&req_statename=&reqdb.zip=99723&reqdb.magic=1&reqdb.wmo=99999'
 
 wget -q -P $DIR $URL_CONTENT
-cat $DIR/DailyHistory.html* | grep -A 2 "Length of Visible Light"
+cat $DIR/DailyHistory.html* | grep -A2 "Length of Visible Light" | grep -v "Length of Visible Light" | grep -v '<td colspan="2">'
 rm $DIR/DailyHistory.html*
