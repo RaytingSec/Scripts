@@ -1,5 +1,5 @@
 #!/bin/bash
-# Retrieves the "Length of Visible Light" of Barrow, AL from wunderground and displays on the command line. Used for METR10 assignment
+# Retrieves the "Length of Visible Light" of Barrow, AK from wunderground and displays on the command line. Used for METR10 assignment
 
 DIR=~/wgetDownloads
 
