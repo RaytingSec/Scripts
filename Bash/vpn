@@ -2,7 +2,7 @@
 # Initiates VPN connection
 
 path=/etc/openvpn
-config=vpnht-64.ovpn
+config=vpnht-128.ovpn
 login=login
 
 sudo openvpn --config $path/$config --auth-user-pass $path/$login

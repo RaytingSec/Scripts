@@ -169,9 +169,11 @@ tree vim hydra traceroute nmap hping3 git fortune cowsay htop atop openvpn lynx-
 
 cpufrequtils
 
-gpart gparted sublime-text-installer sqlitebrowser synaptic atom
+gpart gparted sublime-text-installer synaptic
 
-nautilus-dropbox vlc keepass2 xchat
+nautilus-dropbox vlc keepass2 xchat google-chrome-stable
+
+atom brackets sqlitebrowser
 
 oracle-java8-installer oracle-java8-set-default icedtea-7-plugin flashplugin-installer
 
@@ -186,11 +188,17 @@ Firefox
 
 #openjdk-7-jdk+
 # Java repos
-sudo add-apt-repository -y --remove ppa:webupd8team/sublime-text-3
-sudo add-apt-repository -y --remove ppa:webupd8team/atom
-sudo apt-add-repository -y --remove ppa:jtaylor/keepass
-sudo add-apt-repository -y --remove ppa:webupd8team/java
+sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
+sudo add-apt-repository -y ppa:webupd8team/atom
+sudo apt-add-repository -y ppa:jtaylor/keepass
+sudo add-apt-repository -y ppa:webupd8team/java
+sudo add-apt-repository -y ppa:webupd8team/brackets
 
+# add to /etc/apt/sources.list
+
+deb http://dl.google.com/linux/chrome/deb/ stable main
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
 # Outline
 #   scp scripts

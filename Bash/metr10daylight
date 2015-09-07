@@ -1,0 +1,13 @@
+#!/bin/bash
+# Retrieves the "Length of Visible Light" of Barrow, AL from wunderground and displays on the command line. Used for METR10 assignment
+
+DIR=~/wgetDownloads
+
+MONTH=$1
+DAY=$2
+
+URL_CONTENT='http://www.wunderground.com/history/airport/PABR/2014/'$MONTH'/'$DAY'/DailyHistory.html?req_city=Barrow&req_state=AK&req_statename=&reqdb.zip=99723&reqdb.magic=1&reqdb.wmo=99999'
+
+wget -q -P $DIR $URL_CONTENT
+cat $DIR/DailyHistory.html* | grep -A 2 "Length of Visible Light"
+rm $DIR/DailyHistory.html*
