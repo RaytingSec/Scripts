@@ -1,5 +1,5 @@
 #!/bin/bash
-# Retrieves the "Length of Visible Light" of Barrow, AK from wunderground and displays on the command line. Used for METR10 assignment
+# Retrieves the "Length of Visible Light" of Barrow, AK from wunderground and displays on the command line. Used for METR10 assignment.
 
 DIR=~/wgetDownloads
 
@@ -11,3 +11,4 @@ URL_CONTENT='http://www.wunderground.com/history/airport/PABR/2014/'$MONTH'/'$DA
 wget -q -P $DIR $URL_CONTENT
 cat $DIR/DailyHistory.html* | grep -A2 "Length of Visible Light" | grep -v "Length of Visible Light" | grep -v '<td colspan="2">'
 rm $DIR/DailyHistory.html*
+
