@@ -28,6 +28,5 @@ elif [ "$1" == '--help' ]; then # help text
     echo "All options except silent will print apt update errors"
 else
     echo "option '$1' not recognized."
-    echo "'--help-' gives usage information."
+    echo "'--help' gives usage information."
 fi
-
