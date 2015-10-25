@@ -5,8 +5,8 @@ path=/etc/openvpn
 config=vpnht-128.ovpn
 login=login
 
+# cp /etc/resolv.conf ~/resolv.conf
+# printf 'nameserver 8.8.8.8\nnameserver 8.8.4.4' >> ~/resolv.conf
+# sudo mv ~/resolv.conf /etc/resolv.conf
 sudo -E vim /etc/resolv.conf
-sudo openvpn --config $path/$config --auth-user-pass $path/$login
-# sudo echo "nameserver 8.8.8.8
-# nameserver 8.8.4.4
-# " >> /etc/resolv.conf 
+sudo openvpn --config $path/$config --auth-user-pass $path/$login 
