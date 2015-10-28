@@ -165,13 +165,13 @@ sudo apt-get install oracle-java8-installer
 
 sudo apt-get install
 
-tree vim hydra traceroute nmap hping3 git fortune cowsay htop atop openvpn lynx-cur
+tree vim hydra traceroute nmap hping3 git fortune cowsay htop atop openvpn lynx-cur youtube-dl libnotify-bin 
 
 cpufrequtils
 
 gpart gparted sublime-text-installer synaptic
 
-nautilus-dropbox vlc keepass2 xchat google-chrome-stable
+nautilus-dropbox vlc keepass2 xchat google-chrome-stable burp steam
 
 atom brackets sqlitebrowser
 
