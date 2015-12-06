@@ -165,7 +165,7 @@ sudo apt-get install oracle-java8-installer
 
 sudo apt-get install
 
-tree vim hydra traceroute nmap hping3 git fortune cowsay htop atop openvpn lynx-cur youtube-dl libnotify-bin scanmem
+tree vim hydra traceroute nmap hping3 git fortune cowsay htop atop openvpn lynx-cur youtube-dl libnotify-bin scanmem xdotool software-properties-common
 
 cpufrequtils
 
@@ -173,9 +173,12 @@ gpart gparted sublime-text-installer synaptic
 
 nautilus-dropbox vlc keepass2 xchat google-chrome-stable burp steam
 
-atom brackets sqlitebrowser
+brackets sqlitebrowser
 
 oracle-java8-installer oracle-java8-set-default icedtea-7-plugin flashplugin-installer
+# Server
+
+mysql-server mysql-workbench
 
 # Ubuntu
 unity-tweak-tool gnome-color-chooser
@@ -189,7 +192,6 @@ Firefox
 #openjdk-7-jdk+
 # Java repos
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
-sudo add-apt-repository -y ppa:webupd8team/atom
 sudo apt-add-repository -y ppa:jtaylor/keepass
 sudo add-apt-repository -y ppa:webupd8team/java
 sudo add-apt-repository -y ppa:webupd8team/brackets
@@ -212,4 +214,6 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 ln -s /data/Dropbox ~/Dropbox
 ln -s ~/Dropbox/Code/ ~/code
 ln -s ~/Dropbox/Code/Shell-Scripts/Bash/ ~/bin
+ln -s /data/dev ~/dev
+ln -s /data/vm/ ~/vmware
 
