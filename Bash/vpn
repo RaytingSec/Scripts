@@ -2,7 +2,7 @@
 # Initiates VPN connection
 
 path=/etc/openvpn
-config=us-256b.ovpn
+config=us03-128b.ovpn
 login=login
 
 # cp /etc/resolv.conf ~/resolv.conf
