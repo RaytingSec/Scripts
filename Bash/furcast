@@ -1,5 +1,8 @@
 #!/bin/bash
-# Multiple file series retriever
+# Parallel downloads furcast episodes
+# Range of episodes are inclusive, and specified in parameters
+# The following will download episodes 1, 2, and 3
+# $ bash furcast 1 3
 
 URL_CONTENT="http://content.xanacreations.com/furcast/ep/"
 NAME_START="fc-"
