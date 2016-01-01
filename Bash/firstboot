@@ -165,7 +165,7 @@ sudo apt-get install oracle-java8-installer
 
 sudo apt-get install
 
-tree vim hydra traceroute nmap hping3 git fortune cowsay htop atop openvpn lynx-cur youtube-dl libnotify-bin scanmem xdotool software-properties-common
+tree vim hydra traceroute nmap hping3 git fortune cowsay htop atop openvpn lynx-cur youtube-dl libav-tools libnotify-bin scanmem xdotool software-properties-common
 
 cpufrequtils
 
