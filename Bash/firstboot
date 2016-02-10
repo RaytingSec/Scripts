@@ -165,13 +165,20 @@ sudo apt-get install oracle-java8-installer
 
 sudo apt-get install
 
-tree vim hydra traceroute nmap hping3 git fortune cowsay htop atop openvpn lynx-cur youtube-dl libav-tools libnotify-bin scanmem xdotool software-properties-common
+# essential
+vim fortune cowsay htop
+
+whois finger tree vim traceroute nmap hydra hping3 git fortune cowsay htop atop openvpn
+
+lynx-cur youtube-dl libav-tools libnotify-bin scanmem xdotool software-properties-common
 
 cpufrequtils
 
-gpart gparted sublime-text-installer synaptic
+gpart gparted sublime-text-installer synaptic xchat
 
-nautilus-dropbox vlc keepass2 xchat google-chrome-stable burp steam
+nautilus-dropbox vlc keepass2 google-chrome-stable steam
+
+burp wireshark
 
 brackets sqlitebrowser
 
@@ -185,9 +192,6 @@ Firefox
 
 # Ubuntu
 unity-tweak-tool gnome-color-chooser
-
-# Linux Mint
-finger
 
 # XFCE
 thunar-dropbox-plugin
