@@ -168,7 +168,7 @@ sudo apt-get install
 # essential
 vim fortune cowsay htop
 
-whois finger tree vim traceroute nmap hydra hping3 git fortune cowsay htop atop openvpn
+whois finger tree vim traceroute nmap hping3 git fortune cowsay htop atop openvpn
 
 lynx-cur youtube-dl libav-tools libnotify-bin scanmem xdotool software-properties-common
 
@@ -178,7 +178,7 @@ gpart gparted sublime-text-installer synaptic xchat
 
 nautilus-dropbox vlc keepass2 google-chrome-stable steam
 
-burp wireshark
+wireshark nikto hydra
 
 brackets sqlitebrowser
 
