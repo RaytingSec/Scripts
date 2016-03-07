@@ -2,9 +2,10 @@
 # Initiates VPN connection
 
 path=/etc/openvpn
-config=us-256b.ovpn
+#config=us-256b.ovpn
 #config=us03-128b.ovpn
 #config=us17-128b.ovpn
+config=us-128b.ovpn
 login=login
 
 # printf 'nameserver 8.8.8.8\nnameserver 8.8.4.4' | tee -a /etc/resolv.conf

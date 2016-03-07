@@ -176,7 +176,7 @@ cpufrequtils
 
 gpart gparted sublime-text-installer synaptic xchat
 
-nautilus-dropbox vlc keepass2 google-chrome-stable steam
+nautilus-dropbox vlc keepass2 google-chrome-stable steam simplescreenrecorder
 
 wireshark nikto hydra
 
@@ -202,7 +202,7 @@ sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 sudo add-apt-repository -y ppa:jtaylor/keepass
 sudo add-apt-repository -y ppa:webupd8team/java
 sudo add-apt-repository -y ppa:webupd8team/brackets
-
+sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder
 # add to /etc/apt/sources.list
 
 deb http://dl.google.com/linux/chrome/deb/ stable main
