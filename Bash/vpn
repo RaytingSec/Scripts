@@ -1,5 +1,6 @@
 #!/bin/sh
-# Initiates VPN connection
+# OpenVPN script
+# Connects to vpn via openvpn, includes tools for configuring DNS
 
 DIR=/etc/openvpn
 #CONFIG=us-256b.ovpn
@@ -8,6 +9,27 @@ DIR=/etc/openvpn
 CONFIG=us-128b.ovpn
 AUTH=login
 
-# printf 'nameserver 8.8.8.8\nnameserver 8.8.4.4' | tee -a /etc/resolv.conf
-sudo -E vim /etc/resolv.conf
-sudo openvpn --config $DIR/$CONFIG --auth-user-pass $DIR/$AUTH 
+
+# Default start vpn
+if [ "$1" == "" ]; then
+    sudo openvpn --config $DIR/$CONFIG --auth-user-pass $DIR/$AUTH 
+# resolv, prints out resolv.conf contents
+elif [ "$1" == "-c" ]; then
+    cat /etc/resolv.conf
+# dns, appends Google dns to resolv.conf
+elif [ "$1" == "-d" ]; then
+    printf 'nameserver 8.8.8.8\nnameserver 8.8.4.4' | sudo -E tee -a /etc/resolv.conf > /dev/null
+    sudo -E vim /etc/resolv.conf
+# help
+elif [ "$1" == '--help' ]; then # help text
+    echo "Utilities for connecting to a vpn using OpenVPN"
+    echo "Options:"
+    echo "    -c        c for cat, cat current resolv.conf"
+    echo "    -d        append Google DNS to resolv.conf and open with vim to confirm contents"
+    echo "    (blank)   connect to vpn"
+    echo ""
+# unknown
+else
+    echo "option '$1' not recognized."
+    echo "'--help' gives usage information."
+fi
