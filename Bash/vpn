@@ -9,23 +9,29 @@ DIR=/etc/openvpn
 CONFIG=us-128b.ovpn
 AUTH=login
 
+# Connect to vpn
+vpn_connect () {
+    sudo openvpn --config $DIR/$CONFIG --auth-user-pass $DIR/$AUTH ;
+}
 
 # Default start vpn
 if [ "$1" == "" ]; then
-    sudo openvpn --config $DIR/$CONFIG --auth-user-pass $DIR/$AUTH 
-# resolv, prints out resolv.conf contents
+    vpn_connect
+# prints resolv.conf contents
 elif [ "$1" == "-c" ]; then
     cat /etc/resolv.conf
-# dns, appends Google dns to resolv.conf
+# appends Google dns to resolv.conf, connects to vpn
 elif [ "$1" == "-d" ]; then
     printf 'nameserver 8.8.8.8\nnameserver 8.8.4.4' | sudo -E tee -a /etc/resolv.conf > /dev/null
     sudo -E vim /etc/resolv.conf
+    vpn_connect
 # help
 elif [ "$1" == '--help' ]; then # help text
     echo "Utilities for connecting to a vpn using OpenVPN"
     echo "Options:"
     echo "    -c        c for cat, cat current resolv.conf"
     echo "    -d        append Google DNS to resolv.conf and open with vim to confirm contents"
+    echo "              Implies desire to connect to vpn, so it connects afterwards"
     echo "    (blank)   connect to vpn"
     echo ""
 # unknown
