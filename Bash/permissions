@@ -1,0 +1,4 @@
+sudo chown rayting * . -R
+sudo chgrp rayting * -R
+find . -type d -exec chmod 755 {} \;
+find . -type f -exec chmod 644 {} \;

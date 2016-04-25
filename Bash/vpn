@@ -11,6 +11,7 @@ AUTH=login
 
 # Connect to vpn
 vpn_connect () {
+    firefox -private whatismyipaddress.com & # Test vpn connection
     sudo openvpn --config $DIR/$CONFIG --auth-user-pass $DIR/$AUTH ;
 }
 
