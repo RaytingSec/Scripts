@@ -166,7 +166,7 @@ sudo apt-get install oracle-java8-installer
 sudo apt-get install
 
 # essential
-vim fortune cowsay htop
+vim fortune cowsay htop fonts-hack-ttf
 
 whois finger tree vim traceroute nmap hping3 git fortune cowsay htop atop openvpn
 
@@ -176,7 +176,7 @@ cpufrequtils
 
 gpart gparted sublime-text-installer synaptic xchat
 
-nautilus-dropbox vlc keepass2 google-chrome-stable steam simplescreenrecorder
+nautilus-dropbox vlc keepass2 steam simplescreenrecorder
 
 wireshark nikto hydra
 

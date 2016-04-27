@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # OpenVPN script
 # Connects to vpn via openvpn, includes tools for configuring DNS
 
