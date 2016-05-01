@@ -4,6 +4,8 @@
 
 SOUND=/home/$USER/Music/kqedradio.m3u
 TIME="0630"
+LOCK="qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock"
+# For ubuntu/gnome, qdbus org.gnome.ScreenSaver /ScreenSaver Lock
 
 if [ "$1" != "" ]; then # Time is specified
     TIME=$1
@@ -14,5 +16,7 @@ while [ $(date '+%H%M') -lt $TIME ]; do
     # echo "looping"
     sleep 1
 done
+
 echo "wake tf up"
 vlc $SOUND &
+$LOCK
