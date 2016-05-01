@@ -1,0 +1,18 @@
+#!/bin/bash
+# Alarm that opens some audio file at a specified time, one parameter for time alarm will go off.
+# Spin lock is used since wasted CPU usage is small and trivial
+
+SOUND=/home/$USER/Music/kqedradio.m3u
+TIME="0630"
+
+if [ "$1" != "" ]; then # Time is specified
+    TIME=$1
+fi
+
+while [ $(date '+%H%M') -lt $TIME ]; do
+    # Debugging
+    # echo "looping"
+    sleep 1
+done
+echo "wake tf up"
+vlc $SOUND &

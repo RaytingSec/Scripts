@@ -2,7 +2,7 @@
 # OpenVPN script
 # Connects to vpn via openvpn, includes tools for configuring DNS
 
-DIR=/etc/openvpn
+DIR=/home/$USER/.vpn # directory for all your config files
 #CONFIG=us-256b.ovpn
 #CONFIG=us03-128b.ovpn
 #CONFIG=us17-128b.ovpn
