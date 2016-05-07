@@ -2,14 +2,20 @@
 # Alarm that opens some audio file at a specified time, one parameter for time alarm will go off.
 # Spin lock is used since wasted CPU usage is small and trivial
 
-SOUND=/home/$USER/Music/kqedradio.m3u
+SOUND=/home/$USER/Music/alarm.xspf
 TIME="0630"
+# KDE and maybe some others
 LOCK="qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock"
-# For ubuntu/gnome, qdbus org.gnome.ScreenSaver /ScreenSaver Lock
+# For ubuntu/gnome
+# LOCK="qdbus org.gnome.ScreenSaver /ScreenSaver Lock"
 
 if [ "$1" != "" ]; then # Time is specified
     TIME=$1
 fi
+
+printf "Alarm will go off at $TIME"
+sleep 3
+$LOCK
 
 while [ $(date '+%H%M') -lt $TIME ]; do
     # Debugging
@@ -19,4 +25,3 @@ done
 
 echo "wake tf up"
 vlc $SOUND &
-$LOCK
