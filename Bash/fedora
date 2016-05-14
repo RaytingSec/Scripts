@@ -1,0 +1,15 @@
+
+su -c 'dnf install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+sudo dnf install dnf-plugins-core
+sudo dnf copr enable heliocastro/hack-fonts
+sudo dnf install hack-fonts
+
+dnf install steam
+
+sudo dnf copr enable rommon/telegram
+sudo dnf install telegram-desktop
+
+curl -L git.io/sublimetext | sh
+
+sudo dnf install vim fortune-mod cowsay htop whois finger tree vim traceroute nmap hping3 git cowsay htop atop openvpn lynx youtube-dl gpart gparted hexchat wireshark nikto hydra -y
