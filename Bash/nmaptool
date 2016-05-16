@@ -1,0 +1,18 @@
+#!/bin/bash
+# nmap wrapper for common nmap commands
+# Accepts IP address as parameter
+
+# Default
+ARGC=$#
+
+if [ $ARGC == 2 ]; then
+    # Verbose
+    if [ "$1" == "-v" ]; then
+        sudo nmap -Pn -O -A -v $2
+    # Host discovery
+    elif [ "$1" == "-h" ]; then
+        sudo nmap -sn $2
+    fi
+elif [ $ARGC == 1 ]; then
+    sudo nmap -Pn -O -A $1
+fi
