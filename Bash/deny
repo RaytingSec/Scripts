@@ -7,4 +7,5 @@ thread=1
 while [ $thread -le $2 ]; do
     sudo ping -f $1 > /dev/null &
     let "thread++"
+    echo "launched"
 done
