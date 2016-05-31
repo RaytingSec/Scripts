@@ -1,0 +1,30 @@
+#!/bin/bash
+# Handles backup of config files
+
+DIR=/home/$USER/code
+CONFIG=$DIR/Linux-Config
+BACKUP=$DIR/config
+
+# End dir
+mkdir $BACKUP
+
+# Bash configs
+cp -a $CONFIG/.bash_aliases $BACKUP
+cp -a $CONFIG/.bash_motd $BACKUP
+cp -a $CONFIG/.bashrc $BACKUP
+
+# Other configs
+cp -a $CONFIG/fox.cow $BACKUP
+cp -a $CONFIG/.gitconfig $BACKUP
+cp -a $CONFIG/.vimrc $BACKUP
+cp -a $CONFIG/*.sublime-settings $BACKUP
+cp -a $CONFIG/KDE_keymap.kksrc $BACKUP
+
+# External configs
+cp -a $DIR/External/molokai/colors/molokai.vim $BACKUP
+cp -a $DIR/External/Hack/build/ttf/* $BACKUP
+cp -a $DIR/Shell-Scripts/Bash/firstboot $BACKUP
+
+tar czvf configs.tar.gz -C $DIR config
+
+rm -r $BACKUP

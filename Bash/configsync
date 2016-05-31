@@ -1,0 +1,63 @@
+#!/bin/bash
+# Manage config files
+
+DIR=/home/$USER/code
+REPO="https://github.com/repo"
+
+if [ "$1" == "init" ]; then
+    echo "initialize repos"
+    # cd $DIR
+    # git init stuff
+    # git pull $REPO
+elif [ "$1" == "--update" ]; then
+    echo "update local files"
+    # git remote update $DIR
+elif [ "$1" == "--pull" ]; then
+    echo "update local files"
+    # git pull $DIR
+elif [ "$1" == "--push" ]; then
+    echo "update repo with local files"
+    # git push
+elif [ "$1" == "--tar" ]; then
+    echo "Create archive of configs"
+    # DIR=/home/$USER/code
+    # CONFIG=$DIR/Linux-Config
+    # BACKUP=$DIR/config
+
+    # # End dir
+    # mkdir $BACKUP
+
+    # # Bash configs
+    # cp -a $CONFIG/.bash_aliases $BACKUP
+    # cp -a $CONFIG/.bash_motd $BACKUP
+    # cp -a $CONFIG/.bashrc $BACKUP
+
+    # # Other configs
+    # cp -a $CONFIG/fox.cow $BACKUP
+    # cp -a $CONFIG/.gitconfig $BACKUP
+    # cp -a $CONFIG/.vimrc $BACKUP
+    # cp -a $CONFIG/*.sublime-settings $BACKUP
+    # cp -a $CONFIG/KDE_keymap.kksrc $BACKUP
+
+    # # External configs
+    # cp -a $DIR/External/molokai/colors/molokai.vim $BACKUP
+    # cp -a $DIR/External/Hack/build/ttf/* $BACKUP
+    # cp -a $DIR/Shell-Scripts/Bash/firstboot $BACKUP
+
+    # tar czvf configs.tar.gz -C $DIR config
+    # rm -r $BACKUP
+elif [ "$1" == '--help' ]; then # help text
+    echo "Handles config files, backups, and their repos"
+    echo "Options:"
+    echo "    --init    Create repos"
+    echo "    --update  Poll repo for updates"
+    echo "    --pull    Pull updates and updates repos"
+    echo "    --push    Update repos with local changes"
+    echo "    --tar     Create tarball of configs"
+    echo "    (blank)   No interactions"
+    echo ""
+    echo "All options except silent will print apt update errors"
+else
+    echo "option '$1' not recognized."
+    echo "'--help' for usage information."
+fi
