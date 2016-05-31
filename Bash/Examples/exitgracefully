@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "start of script"
+
+if [ "$1" == "--set" ]; then
+    set -e
+    cd nonexistenterrordir
+elif [ "$1" == "--exit" ]; then
+    cd nonexistenterrordir
+    exit 1
+fi
+
+echo "end of script"
+
