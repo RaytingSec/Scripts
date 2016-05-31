@@ -1,227 +1,102 @@
 
-#! /bin/sh/
-# Debian first boot setup script. Fill in version numbers before use.
+#!/bin/bash
+# Sets up a machine by executing essential preparations after it's first boot
+# 
+# Sets up dirs and symlinks
+# Install repositories and packages
 #
-# Installs the following packages
-# Utilities:
-#   nmap, tree, vim, cpufrequtils, gparted, hydra, git, hping3
-# Other software:
-#   sublime, dropbox, qbittorrent, VMware, firefox
-# Debian drivers:
-#   firmware-iwlwifi
-# Java:
-#   icedtea-7-plugin
-# Programming:
-#   openjdk-7-jdk, IntelliJ, Android Studio
+# Prequisite
+# Data dir should already exist
 
-# Linux Mint:
-sudo apt-get install nmap tree vim cpufrequtils gparted hydra openjdk-7-jdk
-sudo apt-get install sublime-text
+# Where is data stored?
+# If /data exists, then a separate mount has been created
+# Else, use home directory
+if [ -d "/data" ]; then
+    ln -s /data ~/Data
+fi
+DATA=/home/$USER/Data
 
-# Static variables
-SERVER_URL=example.com
-SERVER_PORT=22
-SERVER_USER=null # Assumed that server user has same name
-BACKUP_DIR=~/backup/firstboot/
+# Commonly accessed dirs
+ln -s $DATA/Dropbox ~/Dropbox
+ln -s ~/Dropbox/Code/ ~/code
+ln -s ~/Dropbox/Code/Shell-Scripts/Bash/ ~/bin
+ln -s $DATA/dev ~/dev
+ln -s $DATA/vm/ ~/vmware
 
-# Methods
-# Update
-function Update
-{
+# Libraries
+rm -r $HOME/Music
+rm -r $HOME/Pictures
+rm -r $HOME/Videos
+rm -r $HOME/Documents
+rm -r $HOME/Downloads
+ln -s $DATA/Music $HOME/Music
+ln -s $DATA/Pictures $HOME/Pictures
+ln -s $DATA/Videos $HOME/Videos
+ln -s $DATA/Documents $HOME/Documents
+ln -s $DATA/Downloads $HOME/Downloads
 
-    printf "\nUpdating...\n"
-    sleep 3
+# USERLIBS=( Music Pictures Videos Documents Downloads )
+# ARRAY_SIZE=${#USERLIBS[@]}
+# let "i=0"
+# while [ $i -ne $ARRAY_SIZE ]; do
+#     DIR=${USERLIBS[$i]}
+#     rm -r $HOME/$DIR
+#     ln -s $DATA/$DIR $HOME/$DIR
+#     let "i++"
+# done
 
-	# Update and notify only if errors occur
-	sudo apt-get update -qq
-	# Upgrade and automatically accept
-	sudo apt-get upgrade -qq -y
-}
+# Torrent dirs
+mkdir -P Torrent/down
+mkdir -P Torrent/fin
+mkdir -P Torrent/srcdown
+mkdir -P Torrent/srcfin
+mkdir -P Torrent/srcload
+
+# General
+sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
+sudo apt install vim fortune cowsay lolcat htop atop whois finger tree traceroute nmap openvpn curl hping3 lynx-cur git fonts-hack-ttf libnotify-bin scanmem python-software-properties software-properties-common gpart gparted sublime-text-installer synaptic wireshark nikto hydra
+
+# Host machine
+sudo add-apt-repository -y ppa:jtaylor/keepass
+sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder
+sudo apt install xdotool youtube-dl libav-tools cpufrequtils hexchat vlc keepass2 steam simplescreenrecorder nautilus-dropbox
+
+# VM
+sudo apt install ssh
+
+# Development
+sudo add-apt-repository -y ppa:webupd8team/java
+sudo add-apt-repository -y ppa:webupd8team/brackets
+sudo apt install brackets sqlitebrowser oracle-java8-installer oracle-java8-set-default icedtea-7-plugin flashplugin-installer
+
+# Server
+sudo apt install mysql-server mysql-workbench
+
+# Unity
+sudo apt install unity-tweak-tool gnome-color-chooser
+
+# XFCE
+sudo apt install thunar-dropbox-plugin
+
+# Cinnamon
+sudo add-apt-repository ppa:tsvetko.tsvetkov/cinnamon
+sudo apt install cinnamon cinnamon-themes mint-backgrounds* nemo-dropbox mint-x-icons mint-themes cinnamon-session
+
+echo "
+deb http://dl.google.com/linux/chrome/deb/ stable main
+" >> /etc/apt/sources.list
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
 # Debian Drivers
-function DebDrivers
-{
-    printf "\nInstall Debian drivers\n"
-    sleep 3
-    
-    # Backup sources
-    cp /etc/apt/sources.list $BACKUP_DIR
-    
+function DebDrivers {
     # Add repos
     echo "
     deb http://ftp.de.debian.org/debian/ jessie main non-free contrib
-	# deb-src http://ftp.de.debian.org/debian/ jessie main non-free contrib
+    # deb-src http://ftp.de.debian.org/debian/ jessie main non-free contrib
 
-	deb http://security.debian.org/ jessie/updates main contrib non-free
-	# deb-src http://security.debian.org/ jessie/updates main contrib non-free
-	" >> /etc/apt/sources.list
-    
-    # apt-get operations
-    Update
-    
-    printf "\nInstalling driver...\n"
-    sleep 3
-    sudo apt-get firmware-iwlwifi firmware-realtek
+    deb http://security.debian.org/ jessie/updates main contrib non-free
+    # deb-src http://security.debian.org/ jessie/updates main contrib non-free
+    " >> /etc/apt/sources.list
+
+    sudo apt firmware-iwlwifi firmware-realtek
 }
-
-###################
-printf "\nCreating dirs and retreiving files\n"
-sleep 3
-
-mkdir ~/backup
-#mkdir ~/bin
-scp $SERVER_URL:bin ~/ -r -p $SERVER_PORT
-
-###################
-printf "\nAdding new repos\n"
-sleep 3
-
-# Sublime repo
-sudo add-apt-repository ppa:webupd8team/sublime-text-3
-sudo apt-add-repository "deb http://linux.dropbox.com/ubuntu $(lsb_release -cs) main"
-
-Update
-# Could call update script
-#bash ~/bin/update
-
-###################
-printf "\nCreating dirs and retreiving files\n"
-sleep 3
-
-# Proceed to packages
-sudo apt-get install nmap tree vim cpufrequtils gparted hydra git hping3
-sudo apt-get install sublime-text-installer nautilus-dropbox qbittorrent
-
-# Install VMware
-# Fill in version number before use
-sudo sh VMware-Workstation-xxxxx-xxxxx.x86_64.bundle
-
-# Firefox
-echo "# Firefox
-deb http://packages.linuxmint.com debian import
-" >> /etc/apt/sources.list
-# GPG Key
-sudo gpg --keyserver pgp.mit.edu --recv-keys 3EE67F3D0FF405B2
-sudo gpg --export 3EE67F3D0FF405B2 > 3EE67F3D0FF405B2.gpg
-sudo apt-key add ./3EE67F3D0FF405B2.gpg
-sudo rm ./3EE67F3D0FF405B2.gpg
-# Get Firefox
-apt-get update
-apt-get install firefox
-apt-get install firefox-l10n-en-us 
-
-# Java
-sudo apt-get install icedtea-7-plugin
-
-# Programming
-# OpenJDK
-sudo apt-get install openjdk-7-jdk
-# Get remote files
-scp $SERVER_URL:/someDirectory/ ~/ -r -p $SERVER_PORT
-# Extract intellij, android-studio, fill in version number before use
-tar -xzf ~/idealC-xxxxx.tar.gz
-tar -xzf ~/android-studio-ide-xxxxx-linux.zip
-
-###################
-# Install drivers for Debian systems
-DebDrivers
-
-
-
-# tmp
-sudo add-apt-repository ppa:webupd8team/sublime-text-3
-sudo apt-get update 
-sudo apt-get install tree vim hydra traceroute nmap hping3 cpufrequtils gpart gparted git openjdk-7-jdk nautilus-dropbox sublime-text-installer vlc synaptic icedtea-7-plugin unity-tweak-tool flashplugin-installer
-
-#Ubuntu gnome vm
-sudo add-apt-repository ppa:webupd8team/sublime-text-3
-sudo apt-get update 
-sudo apt-get install tree vim hydra traceroute nmap hping3 gpart gparted git openjdk-7-jdk nautilus-dropbox sublime-text-installer vlc synaptic icedtea-7-plugin flashplugin-installer
-
-# Mint VM
-sudo add-apt-repository ppa:webupd8team/sublime-text-3
-sudo apt-get update 
-sudo apt-get install tree vim hydra traceroute nmap hping3 gpart gparted git openjdk-7-jdk nautilus-dropbox sublime-text-installer vlc synaptic icedtea-7-plugin flashplugin-installer
-
-# Ubuntu Gnome Host
-sudo add-apt-repository ppa:webupd8team/sublime-text-3
-sudo apt-get update 
-sudo apt-get install tree vim hydra traceroute nmap hping3 cpufrequtils gpart gparted git openjdk-7-jdk nautilus-dropbox sublime-text-installer vlc synaptic icedtea-7-plugin flashplugin-installer
-
-sudo add-apt-repository ppa:tsvetko.tsvetkov/cinnamon
-sudo apt-get update
-sudo apt-get install cinnamon cinnamon-themes mint-backgrounds* nemo-dropbox mint-x-icons mint-themes cinnamon-session
-
-# Java official
-
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-
-# All packages
-
-# Debian: first do
-# sudo apt-get install software-properties-common python-software-properties
-
-sudo apt-get install
-
-# essential
-vim fortune cowsay lolcat htop fonts-hack-ttf
-
-whois finger tree vim traceroute nmap hping3 git fortune cowsay htop atop openvpn curl
-
-lynx-cur youtube-dl libav-tools libnotify-bin scanmem xdotool software-properties-common
-
-cpufrequtils
-
-gpart gparted sublime-text-installer synaptic hexchat
-
-nautilus-dropbox vlc keepass2 steam simplescreenrecorder
-
-wireshark nikto hydra
-
-brackets sqlitebrowser
-
-oracle-java8-installer oracle-java8-set-default icedtea-7-plugin flashplugin-installer
-
-# Server
-mysql-server mysql-workbench
-
-# Debian
-Firefox
-
-# Ubuntu
-unity-tweak-tool gnome-color-chooser
-
-# XFCE
-thunar-dropbox-plugin
-
-#openjdk-7-jdk+
-# Java repos
-sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
-sudo add-apt-repository -y ppa:jtaylor/keepass
-sudo add-apt-repository -y ppa:webupd8team/java
-sudo add-apt-repository -y ppa:webupd8team/brackets
-sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder
-# add to /etc/apt/sources.list
-
-deb http://dl.google.com/linux/chrome/deb/ stable main
-
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
-# Outline
-#   scp scripts
-#   add repos
-#   update/upgrade
-#   install packages
-#   create links
-#   extract eclipse
-#   install chrome
-
-ln -s /data/Dropbox ~/Dropbox
-ln -s ~/Dropbox/Code/ ~/code
-ln -s ~/Dropbox/Code/Shell-Scripts/Bash/ ~/bin
-ln -s /data/dev ~/dev
-ln -s /data/vm/ ~/vmware
-ln -s /data ~/Data
-
