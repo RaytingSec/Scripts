@@ -6,7 +6,9 @@ DIR=/home/$USER/.vpn # directory for all your config files
 #CONFIG=us-256b.ovpn
 #CONFIG=us03-128b.ovpn
 #CONFIG=us17-128b.ovpn
-CONFIG=us-128b.ovpn
+#CONFIG=us-128b.ovpn
+#CONFIG=hk-256b.ovpn
+CONFIG=us-ca04-128b.ovpn
 AUTH=login
 
 # Connect to vpn
