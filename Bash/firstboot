@@ -82,6 +82,7 @@ sudo apt install thunar-dropbox-plugin
 sudo add-apt-repository ppa:tsvetko.tsvetkov/cinnamon
 sudo apt install cinnamon cinnamon-themes mint-backgrounds* nemo-dropbox mint-x-icons mint-themes cinnamon-session
 
+# Chrome
 echo "
 deb http://dl.google.com/linux/chrome/deb/ stable main
 " >> /etc/apt/sources.list

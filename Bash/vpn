@@ -25,7 +25,7 @@ elif [ "$1" == "-c" ]; then
     cat /etc/resolv.conf
 # appends Google dns to resolv.conf, connects to vpn
 elif [ "$1" == "-d" ]; then
-    printf 'nameserver 8.8.8.8\nnameserver 8.8.4.4' | sudo -E tee /etc/resolv.conf > /dev/null
+    printf 'nameserver 8.8.8.8\nnameserver 8.8.4.4\n' | sudo -E tee /etc/resolv.conf > /dev/null
     # sudo -E vim /etc/resolv.conf
     vpn_connect
 # help
