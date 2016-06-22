@@ -54,7 +54,7 @@ mkdir -P Torrent/srcload
 
 # General
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
-sudo apt install vim fortune cowsay lolcat htop atop whois finger tree traceroute nmap openvpn curl hping3 lynx-cur git fonts-hack-ttf libnotify-bin scanmem python-software-properties software-properties-common gpart gparted sublime-text-installer synaptic wireshark nikto hydra
+sudo apt install vim fortune cowsay lolcat htop atop whois finger tree traceroute nmap openvpn curl hping3 lynx-cur git fonts-hack-ttf libnotify-bin scanmem python-software-properties software-properties-common gpart gparted sublime-text-installer synaptic wireshark nikto hydra sqlmap
 
 # Host machine
 sudo add-apt-repository -y ppa:jtaylor/keepass
@@ -67,7 +67,7 @@ sudo apt install ssh
 # Development
 sudo add-apt-repository -y ppa:webupd8team/java
 sudo add-apt-repository -y ppa:webupd8team/brackets
-sudo apt install brackets sqlitebrowser oracle-java8-installer oracle-java8-set-default icedtea-7-plugin flashplugin-installer
+sudo apt install brackets sqlitebrowser oracle-java8-installer oracle-java8-set-default # icedtea-7-plugin flashplugin-installer
 
 # Server
 sudo apt install mysql-server mysql-workbench
