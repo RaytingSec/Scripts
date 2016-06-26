@@ -1,0 +1,21 @@
+#!/bin/bash
+# Parallel downloads TechSnap episodes
+# Range of episodes are inclusive, and specified in parameters
+# The following will download episodes 1, 2, and 3
+# $ bash techsnap 1 3
+
+URL_CONTENT="http://www.podtrac.com/pts/redirect.mp3/traffic.libsyn.com/jnite/"
+NAME_START="techsnap-0"
+NAME_END=".mp3"
+DIR=~/wget
+
+START=$1
+END=$2
+let "CURRENT=$START"
+while [ $CURRENT -le $END ]; do
+    TITLE=$NAME_START$CURRENT$NAME_END
+    URL_FULL=$URL_CONTENT$TITLE
+    wget $URL_FULL -P $DIR &
+    echo "Started job for $TITLE"
+    let "CURRENT++"
+done
