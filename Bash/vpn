@@ -3,12 +3,17 @@
 # Connects to vpn via openvpn, includes tools for configuring DNS
 
 DIR=/home/$USER/.vpn # directory for all your config files
+
 #CONFIG=us-256b.ovpn
 #CONFIG=us03-128b.ovpn
 #CONFIG=us17-128b.ovpn
 #CONFIG=us-128b.ovpn
 #CONFIG=hk-256b.ovpn
-CONFIG=us-ca04-128b.ovpn
+#CONFIG=us-ca04-128b.ovpn
+
+#CONFIG=us-ca01-128b.ovpn
+CONFIG=us-ca01-443-128b.ovpn
+
 AUTH=login
 
 # DNS
@@ -28,9 +33,9 @@ if [ "$1" == "" ]; then
 # prints resolv.conf contents
 elif [ "$1" == "-c" ]; then
     cat /etc/resolv.conf
+# config dns
 elif [ "$1" == "-d" ]; then
     set_dns
-    vpn_connect
 # help
 elif [ "$1" == '--help' ]; then # help text
     echo "Utilities for connecting to a vpn using OpenVPN"
