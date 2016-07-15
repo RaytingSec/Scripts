@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # Sets up a machine by executing essential preparations after it's first boot
 # 
@@ -17,11 +16,11 @@
 DATA=/home/$USER/Data
 
 # Commonly accessed dirs
-# ln -s $DATA/Dropbox ~/Dropbox
-# ln -s ~/Dropbox/Code/ ~/code
-# ln -s ~/Dropbox/Code/Shell-Scripts/Bash/ ~/bin
-# ln -s $DATA/dev ~/dev
-# ln -s $DATA/vm/ ~/vmware
+ln -s $DATA/Dropbox ~/Dropbox
+ln -s ~/Dropbox/Code/ ~/code
+ln -s ~/Dropbox/Code/Shell-Scripts/Bash/ ~/bin
+ln -s $DATA/dev ~/dev
+ln -s $DATA/vm/ ~/vmware
 
 # Libraries
 rm -r $HOME/Documents
@@ -30,6 +29,7 @@ rm -r $HOME/Music
 rm -r $HOME/Pictures
 rm -r $HOME/Videos
 
+# If not existing
 # mkdir -p $DATA/Documents
 # mkdir -p $DATA/Downloads
 # mkdir -p $DATA/Music
@@ -41,6 +41,13 @@ ln -s $DATA/Downloads $HOME/Downloads
 ln -s $DATA/Music $HOME/Music
 ln -s $DATA/Pictures $HOME/Pictures
 ln -s $DATA/Videos $HOME/Videos
+
+# Torrent dirs
+mkdir -p $DATA/Torrent/down
+mkdir -p $DATA/Torrent/fin
+mkdir -p $DATA/Torrent/srcdown
+mkdir -p $DATA/Torrent/srcfin
+mkdir -p $DATA/Torrent/srcload
 
 # vim molokai
 # mkdir -p ~/.vim/colors
@@ -59,9 +66,52 @@ ln -s $DATA/Videos $HOME/Videos
 #     let "i++"
 # done
 
-# Torrent dirs
-mkdir -p $DATA/Torrent/down
-mkdir -p $DATA/Torrent/fin
-mkdir -p $DATA/Torrent/srcdown
-mkdir -p $DATA/Torrent/srcfin
-mkdir -p $DATA/Torrent/srcload
+# General
+sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
+sudo apt install vim fortune cowsay lolcat htop atop whois finger tree traceroute nmap openvpn curl hping3 lynx-cur git fonts-hack-ttf libnotify-bin scanmem python-software-properties software-properties-common gpart gparted sublime-text-installer synaptic wireshark nikto hydra sqlmap
+
+# Host machine
+sudo add-apt-repository -y ppa:jtaylor/keepass
+sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder
+sudo apt install xdotool youtube-dl libav-tools cpufrequtils hexchat vlc keepass2 steam simplescreenrecorder nautilus-dropbox
+
+# VM
+sudo apt install ssh
+
+# Development
+sudo add-apt-repository -y ppa:webupd8team/java
+sudo add-apt-repository -y ppa:webupd8team/brackets
+sudo apt install brackets sqlitebrowser oracle-java8-installer oracle-java8-set-default # icedtea-7-plugin flashplugin-installer
+
+# Server
+sudo apt install mysql-server mysql-workbench
+
+# Unity
+sudo apt install unity-tweak-tool gnome-color-chooser
+
+# XFCE
+sudo apt install thunar-dropbox-plugin
+
+# Cinnamon
+sudo add-apt-repository ppa:tsvetko.tsvetkov/cinnamon
+sudo apt install cinnamon cinnamon-themes mint-backgrounds* nemo-dropbox mint-x-icons mint-themes cinnamon-session
+
+# Chrome
+echo "
+deb http://dl.google.com/linux/chrome/deb/ stable main
+" >> /etc/apt/sources.list
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+# Debian Drivers
+function DebDrivers {
+    # Add repos
+    echo "
+    deb http://ftp.de.debian.org/debian/ jessie main non-free contrib
+    # deb-src http://ftp.de.debian.org/debian/ jessie main non-free contrib
+
+    deb http://security.debian.org/ jessie/updates main contrib non-free
+    # deb-src http://security.debian.org/ jessie/updates main contrib non-free
+    " >> /etc/apt/sources.list
+
+    sudo apt firmware-iwlwifi firmware-realtek
+}

@@ -5,24 +5,16 @@
 # Quiet outputs update errors and upgrade information but does NOT ask for upgrade permission
 # Default outputs update error and asks for upgrade permission
 
-if [ "$1" == "-v" ]; then # Verbose
+if [ "$1" == "" ]; then # Default verbose
     sudo apt update
+    apt list --upgradable
+    alert
+elif [ "$1" == "--upgrade" ]; then # Quiet
     sudo apt upgrade
-elif [ "$1" == "-s" ]; then # Silent
-    sudo apt update
-    sudo apt upgrade -qq -y
-elif [ "$1" == "-q" ]; then # Quiet
-    sudo apt update -qq
-    sudo apt upgrade -y
-elif [ "$1" == "" ]; then # Default "somewhat quiet"
-    sudo apt update -qq
-    sudo apt upgrade
+    alert
 elif [ "$1" == '--help' ]; then # help text
     echo "Sends update and upgrade commands to apt"
     echo "Options:"
-    echo "    -v        all outputs and ask for upgrades"
-    echo "    -s        no output at all and accept upgrades"
-    echo "    -q        only output for upgrades"
     echo "    (blank)   ask and output for upgrades only"
     echo ""
     echo "All options except silent will print apt update errors"
