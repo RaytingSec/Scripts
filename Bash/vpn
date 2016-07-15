@@ -4,15 +4,14 @@
 
 DIR=/home/$USER/.vpn # directory for all your config files
 
-#CONFIG=us-256b.ovpn
-#CONFIG=us03-128b.ovpn
-#CONFIG=us17-128b.ovpn
-#CONFIG=us-128b.ovpn
-#CONFIG=hk-256b.ovpn
-#CONFIG=us-ca04-128b.ovpn
-
 #CONFIG=us-ca01-128b.ovpn
 CONFIG=us-ca01-443-128b.ovpn
+#CONFIG=nl01-443-128b.ovpn
+#CONFIG=ro01-443-128b.ovpn
+#CONFIG=ro-256b.ovpn
+#CONFIG=us-128b.ovpn
+#CONFIG=us-ca01-128b.ovpn
+#CONFIG=us-ca01-443-128b.ovpn
 
 AUTH=login
 
