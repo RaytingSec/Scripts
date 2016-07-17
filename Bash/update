@@ -1,15 +1,11 @@
 #!/bin/bash
-# Simple script to update packages on machine. Has three output levels:
-# Silent only outputs update errors and does NOT ask for upgrade permission
-# Verbose outputs everything and asks for permission
-# Quiet outputs update errors and upgrade information but does NOT ask for upgrade permission
-# Default outputs update error and asks for upgrade permission
+# Simple script to update packages on machine
 
-if [ "$1" == "" ]; then # Default verbose
+if [ "$1" == "" ]; then # Update repos
     sudo apt update
     apt list --upgradable
     alert
-elif [ "$1" == "--upgrade" ]; then # Quiet
+elif [ "$1" == "--upgrade" ] || [ "$1" == "-u" ] ; then # Upgrade packages
     sudo apt upgrade
     alert
 elif [ "$1" == '--help' ]; then # help text
