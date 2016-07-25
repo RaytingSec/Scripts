@@ -11,11 +11,14 @@ DIR=~/wget
 
 START=$1
 END=$2
+mkdir -p $DIR
 let "CURRENT=$START"
 while [ $CURRENT -le $END ]; do
     TITLE=$NAME_START$CURRENT$NAME_END
     URL_FULL=$URL_CONTENT$TITLE
-    wget $URL_FULL -P $DIR &
+    LOG=$DIR/$NAME_START$CURRENT".log"
+    touch $LOG
+    wget -nv -o $LOG -P $DIR $URL_FULL &
     echo "Started job for $TITLE"
     let "CURRENT++"
 done
