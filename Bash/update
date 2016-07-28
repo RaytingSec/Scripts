@@ -4,10 +4,10 @@
 if [ "$1" == "" ]; then # Update repos
     sudo apt update
     apt list --upgradable
-    alert
+    # alert
 elif [ "$1" == "--upgrade" ] || [ "$1" == "-u" ] ; then # Upgrade packages
     sudo apt upgrade
-    alert
+    # alert
 elif [ "$1" == '--help' ]; then # help text
     echo "Sends update and upgrade commands to apt"
     echo "Options:"
