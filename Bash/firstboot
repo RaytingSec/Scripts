@@ -68,7 +68,7 @@ mkdir -p $DATA/Torrent/srcload
 
 # General
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
-sudo apt install vim fortune cowsay fortunes fortunes-debian-hints fortunes-off fortunes-spam fortunes-ubuntu-server lolcat htop atop whois finger tree traceroute nmap masscan openvpn curl hping3 lynx-cur git fonts-hack-ttf libnotify-bin sox libsox-fmt-mp3 scanmem python-software-properties software-properties-common gpart gparted sublime-text-installer synaptic wireshark nikto hydra sqlmap
+sudo apt install vim fortune cowsay fortunes fortunes-debian-hints fortunes-off fortunes-spam fortunes-ubuntu-server lolcat htop atop whois finger tree traceroute openvpn curl hping3 lynx-cur git fonts-hack-ttf libnotify-bin sox libsox-fmt-mp3 scanmem python-software-properties software-properties-common gpart gparted sublime-text-installer synaptic wireshark nikto hydra sqlmap nmap masscan zmap radare2
 
 # Host machine
 sudo add-apt-repository -y ppa:jtaylor/keepass
