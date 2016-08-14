@@ -76,7 +76,7 @@ sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder
 sudo apt install xdotool youtube-dl libav-tools cpufrequtils hexchat vlc keepass2 steam simplescreenrecorder nautilus-dropbox audacity
 
 # VM
-sudo apt install ssh
+sudo apt install ssh open-vm-tools-desktop open-vm-tools-dkms
 
 # Development
 sudo add-apt-repository -y ppa:webupd8team/java
