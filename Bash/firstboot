@@ -18,7 +18,7 @@ DATA=/home/$USER/Data
 # Commonly accessed dirs
 ln -s $DATA/Dropbox ~/Dropbox
 ln -s ~/Dropbox/Code/ ~/code
-ln -s ~/Dropbox/Code/Shell-Scripts/Bash/ ~/bin
+ln -s ~/Dropbox/Code/Scripts/Bash/ ~/bin
 ln -s $DATA/dev ~/dev
 ln -s $DATA/vm/ ~/vmware
 
