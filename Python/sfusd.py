@@ -15,7 +15,7 @@ auth = (user, passwd)
 
 # Login 1
 
-domain = "https://REDACTED"
+domain = "https://district.sfusd.edu"
 
 s = requests.Session()
 s.mount('https://', SSL_adapter())
@@ -25,8 +25,8 @@ if r.status_code == 200:
 
 # Login 2
 
-loginpage = domain + "/_layouts/ens/Login.aspx?ReturnUrl=/_layouts/ens/advices.aspx"
-advices = domain + "/_layouts/ens/advices.aspx"
+loginpage = "https://district.sfusd.edu/_layouts/ens/Login.aspx?ReturnUrl=/_layouts/ens/advices.aspx"
+advices = "https://district.sfusd.edu/_layouts/ens/advices.aspx"
 
 r = s.get(loginpage)
 # Scrape all input fields
@@ -47,7 +47,7 @@ else:
 
 # Get PDFs
 
-tags = BeautifulSoup(r.text, "lxmlclear").findAll('tr')
+tags = BeautifulSoup(r.text, "lxml").findAll('tr')
 parsed = []
 for tr in tags:
     val = tr.findAll('td')[0].string
@@ -62,7 +62,7 @@ for tr in tags:
 
 # Downloading magic
 counter = 0
-url_base = domain + "/_layouts/ens/"
+url_base = "https://district.sfusd.edu/_layouts/ens/"
 for a in parsed:
     counter += 1
     name = a[0] + " SFUSD.pdf"
