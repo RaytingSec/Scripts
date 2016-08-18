@@ -1,3 +1,5 @@
+# Downloads your payroll PDFs
+
 import requests
 import ssl
 from bs4 import BeautifulSoup
