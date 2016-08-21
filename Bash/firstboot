@@ -1,112 +1,7 @@
 #!/bin/bash
-# Sets up a machine by executing essential preparations after it's first boot
-# 
-# Sets up dirs and symlinks
-# Install repositories and packages
-#
-# Prequisite
-# Data dir should already exist
+# Configure a fresh Linux installation
 
-# Where is data stored?
-# If /data exists, then a separate mount has been created
-# Else, use home directory
-# if [ -d "/data" ]; then
-#     ln -s /data ~/Data
-# fi
-DATA=/home/$USER/Data
-
-# Commonly accessed dirs
-ln -s $DATA/Dropbox ~/Dropbox
-ln -s ~/Dropbox/Code/ ~/code
-ln -s ~/Dropbox/Code/Scripts/Bash/ ~/bin
-ln -s $DATA/dev ~/dev
-ln -s $DATA/vm/ ~/vmware
-
-# Libraries
-rm -r $HOME/Documents
-rm -r $HOME/Downloads
-rm -r $HOME/Music
-rm -r $HOME/Pictures
-rm -r $HOME/Videos
-
-# If not existing
-# mkdir -p $DATA/Documents
-# mkdir -p $DATA/Downloads
-# mkdir -p $DATA/Music
-# mkdir -p $DATA/Pictures
-# mkdir -p $DATA/Videos
-
-ln -s $DATA/Documents $HOME/Documents
-ln -s $DATA/Downloads $HOME/Downloads
-ln -s $DATA/Music $HOME/Music
-ln -s $DATA/Pictures $HOME/Pictures
-ln -s $DATA/Videos $HOME/Videos
-
-# Torrent dirs
-mkdir -p $DATA/Torrent/down
-mkdir -p $DATA/Torrent/fin
-mkdir -p $DATA/Torrent/srcdown
-mkdir -p $DATA/Torrent/srcfin
-mkdir -p $DATA/Torrent/srcload
-
-# USERLIBS=( Music Pictures Videos Documents Downloads )
-# ARRAY_SIZE=${#USERLIBS[@]}
-# let "i=0"
-# while [ $i -ne $ARRAY_SIZE ]; do
-#     DIR=${USERLIBS[$i]}
-#     rm -r $HOME/$DIR
-#     ln -s $DATA/$DIR $HOME/$DIR
-#     let "i++"
-# done
-
-# vim molokai
-# mkdir -p ~/.vim/colors
-# cp $molokaiorigin ~/.vim/colors
-
-# cowsay
-# sudo cp fox.cow /usr/share/cowsay/cows/
-
-# General
-sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
-sudo apt install vim fortune cowsay fortunes fortunes-debian-hints fortunes-off fortunes-spam fortunes-ubuntu-server lolcat htop atop whois finger tree traceroute openvpn curl hping3 lynx-cur git fonts-hack-ttf libnotify-bin sox libsox-fmt-mp3 scanmem python-software-properties software-properties-common gpart gparted sublime-text-installer synaptic wireshark nikto hydra sqlmap nmap masscan zmap radare2
-
-# Host machine
-sudo add-apt-repository -y ppa:jtaylor/keepass
-sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder
-sudo apt install xdotool youtube-dl libav-tools cpufrequtils hexchat vlc keepass2 steam simplescreenrecorder nautilus-dropbox audacity
-
-# VM
-sudo apt install ssh open-vm-tools-desktop open-vm-tools-dkms
-
-# Development
-sudo add-apt-repository -y ppa:webupd8team/java
-sudo add-apt-repository -y ppa:webupd8team/brackets
-sudo add-apt-repository -y ppa:gns3/ppa
-sudo apt install sqlitebrowser oracle-java8-installer oracle-java8-set-default python3-pip brackets gns3-gui gns3-iou # icedtea-7-plugin flashplugin-installer
-
-# Server
-sudo apt install mysql-server mysql-workbench
-
-# Unity
-sudo apt install unity-tweak-tool gnome-color-chooser
-
-# XFCE
-sudo apt install thunar-dropbox-plugin
-
-# Cinnamon
-sudo add-apt-repository ppa:tsvetko.tsvetkov/cinnamon
-sudo apt install cinnamon cinnamon-themes mint-backgrounds* nemo-dropbox mint-x-icons mint-themes cinnamon-session
-
-# Python development
-sudo -H pip3 install requests[security]
-
-# Chrome
-echo "
-deb http://dl.google.com/linux/chrome/deb/ stable main
-" >> /etc/apt/sources.list
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
-# Debian Drivers
+# Debian Drivers if they're ever needed
 function DebDrivers {
     # Add repos
     echo "
@@ -117,5 +12,235 @@ function DebDrivers {
     # deb-src http://security.debian.org/ jessie/updates main contrib non-free
     " >> /etc/apt/sources.list
 
-    sudo apt firmware-iwlwifi firmware-realtek
+    sudo apt update && sudo apt firmware-iwlwifi firmware-realtek
 }
+
+# Libraries
+
+DATA=/home/$USER/Data
+
+# Find data dir
+if [ -d "/data" ]; then
+    ln -s /data ~/Data
+    echo "Using /data"
+elif [ -d $DATA ]; then
+    echo "Using ~/data"
+else
+    echo "No data directory found, exiting"
+    exit 1
+fi
+
+# Link to common dirs
+ln -s $DATA/Dropbox ~/Dropbox
+ln -s ~/Dropbox/Code/ ~/code
+ln -s ~/code/Scripts/Bash/ ~/bin
+ln -s $DATA/dev ~/dev
+ln -s $DATA/vm/ ~/vmware
+
+# Relocate dirs from ~/ to ~/data
+USERLIBS=(
+    Documents
+    Downloads
+    Music
+    Pictures
+    Videos
+)
+for DIR in "${USERLIBS[@]}"; do
+    rm -r $HOME/$DIR
+    ln -s $DATA/$DIR $HOME/$DIR
+done
+
+# rm -r $HOME/Documents
+# rm -r $HOME/Downloads
+# rm -r $HOME/Music
+# rm -r $HOME/Pictures
+# rm -r $HOME/Videos
+
+# ln -s $DATA/Documents $HOME/Documents
+# ln -s $DATA/Downloads $HOME/Downloads
+# ln -s $DATA/Music $HOME/Music
+# ln -s $DATA/Pictures $HOME/Pictures
+# ln -s $DATA/Videos $HOME/Videos
+
+# Torrent dirs
+# mkdir -p $DATA/Torrent/down
+# mkdir -p $DATA/Torrent/fin
+# mkdir -p $DATA/Torrent/srcdown
+# mkdir -p $DATA/Torrent/srcfin
+# mkdir -p $DATA/Torrent/srcload
+
+# Configs
+
+CONFIGS=$DATA/configs
+
+# general configs
+mv $CONFIGS/.* ~/
+
+# vim
+mkdir -p ~/.vim/colors
+cp $CONFIGS/molokai.vim ~/.vim/colors
+
+# cowsay
+sudo cp $CONFIGS/fox.cow /usr/share/cowsay/cows/
+
+# sublime
+wget -P ~/.config/sublime-text-3/Installed\ Packages https://sublime.wbond.net/Package%20Control.sublime-package
+cp $CONFIGS/*.sublime-settings ~/.config/sublime-text-3/Packages/User
+# Also install MarkdownEditing and GitGutter
+
+# Packages
+HOST=true
+VM=false
+DEV=true
+SERV=false
+UNITY=false
+XFCE=false
+CIN=false
+
+REPOS=()
+PACKAGES=()
+
+# General
+REPOS+=(
+    "ppa:webupd8team/sublime-text-3"
+)
+PACKAGES+=(
+    "vim"
+    "fortune"
+    "cowsay"
+    "fortunes"
+    "fortunes-debian-hints"
+    "fortunes-off"
+    "fortunes-spam"
+    "fortunes-ubuntu-server"
+    "lolcat"
+    "htop"
+    "atop"
+    "whois"
+    "finger"
+    "tree"
+    "traceroute"
+    "nmap"
+    "openvpn"
+    "curl"
+    "hping3"
+    "lynx-cur"
+    "git"
+    "fonts-hack-ttf"
+    "libnotify-bin"
+    "scanmem"
+    "python-software-properties"
+    "software-properties-common"
+    "gpart"
+    "gparted"
+    "sublime-text-installer"
+    "synaptic"
+    "wireshark"
+)
+
+# Host machine
+if [ $HOST = true ]; then
+    REPOS+=(
+        "ppa:jtaylor/keepass"
+        "ppa:maarten-baert/simplescreenrecorder"
+    )
+    PACKAGES+=(
+        "xdotool"
+        "youtube-dl"
+        "libav-tools"
+        "cpufrequtils"
+        "hexchat"
+        "vlc"
+        "keepass2"
+        "steam"
+        "simplescreenrecorder"
+        "nautilus-dropbox"
+        "audacity"
+    )
+# VM
+elif [ $VM = true ]; then
+    PACKAGES+=(
+        "ssh"
+        "open-vm-tools-desktop"
+        "open-vm-tools-dkms"
+    )
+fi
+
+# Development/Security
+if [ $DEV = true ]; then
+    REPOS+=(
+        "ppa:webupd8team/java"
+        "ppa:webupd8team/brackets"
+        "ppa:gns3/ppa"
+    )
+    PACKAGES+=(
+        # Development
+        "sqlitebrowser"
+        "oracle-java8-installer"
+        "oracle-java8-set-default"
+        "python3-pip"
+        "brackets"
+        "gns3-gui"
+        "gns3-iou"
+        # "icedtea-7-plugin"
+        # "flashplugin-installer"
+        # Security
+        "sox"
+        "libsox-fmt-mp3"
+        "nikto"
+        "hydra"
+        "sqlmap"
+        "masscan"
+        "zmap"
+        "radar"
+    )
+fi
+
+# Server
+if [ $SERV = true ]; then
+    PACKAGES+=(
+        "ssh"
+        "mysql-server"
+        "mysql-workbench"
+    )
+fi
+
+# Unity
+if [ $UNITY = true ]; then
+    PACKAGES+=(
+        "unity-tweak-tool"
+        "gnome-color-chooser"
+    )
+# XFCE
+elif [ $XFCE = true ]; then
+    PACKAGES+=(
+        "thunar-dropbox-plugin"
+    )
+# Cinnamon
+elif [ $CIN = true ]; then
+    REPOS+=(
+        "ppa:tsvetko.tsvetkov/cinnamon"
+    )
+    PACKAGES+=(
+        "cinnamon"
+        "cinnamon-themes"
+        "mint-backgrounds*"
+        "nemo-dropbox"
+        "mint-x-icons"
+        "mint-themes"
+        "cinnamon-session"
+    )
+fi
+
+for R in "${REPOS[@]}"; do
+    echo "sudo add-apt-repository -y"$R
+done
+
+SELECTED=""
+for P in "${PACKAGES[@]}"; do
+    SELECTED+=$P" "
+done
+echo "sudo apt install "$SELECTED
+
+# Python development
+sudo -H pip3 install requests[security]
