@@ -86,7 +86,6 @@ sudo cp $CONFIGS/fox.cow /usr/share/cowsay/cows/
 # sublime
 wget -P ~/.config/sublime-text-3/Installed\ Packages https://sublime.wbond.net/Package%20Control.sublime-package
 cp $CONFIGS/*.sublime-settings ~/.config/sublime-text-3/Packages/User
-# Also install MarkdownEditing and GitGutter
 
 # Packages
 HOST=true
