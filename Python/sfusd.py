@@ -6,10 +6,13 @@ from bs4 import BeautifulSoup
 import os
 import getpass
 
+
 # For SSL compatibility
 class SSL_adapter(requests.adapters.HTTPAdapter):
+
     def init_poolmanager(self, connections, maxsize, block=False):
         self.poolmanager = requests.packages.urllib3.poolmanager.PoolManager(num_pools=connections, maxsize=maxsize, block=block, ssl_version=ssl.PROTOCOL_TLSv1)
+
 
 user = input("username: ")
 passwd = getpass.getpass("password: ")
@@ -21,7 +24,7 @@ domain = "https://district.sfusd.edu"
 
 s = requests.Session()
 s.mount('https://', SSL_adapter())
-r = s.get(domain, auth = auth)
+r = s.get(domain, auth=auth)
 if r.status_code == 200:
     print("Authenticated to main site")
 
@@ -54,7 +57,7 @@ parsed = []
 for tr in tags:
     val = tr.findAll('td')[0].string
     if val is not None:
-        val = val[:len(val)-1] # remove trailing period
+        val = val[:len(val) - 1]  # remove trailing period
         if val.isdecimal():
             # save tuple with date and url for pdf
             a = tr.findAll('td')[3].string.split('/')
@@ -75,7 +78,7 @@ for a in parsed:
         n = 0
         newName = name
         while (os.path.exists(newName)):
-            n +=1
+            n += 1
             newName = "{}.{}".format(name, n)
         print("{} exists, saving as {}".format(name, newName))
         finalName = newName
