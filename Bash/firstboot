@@ -83,6 +83,10 @@ cp $CONFIGS/molokai.vim ~/.vim/colors
 # cowsay
 sudo cp $CONFIGS/fox.cow /usr/share/cowsay/cows/
 
+# inputrc
+cat /etc/inputrc $CONFIGS/inputrc >> ~/inputrc
+sudo mv ~/inputrc /etc/inputrc
+
 # sublime
 wget -P ~/.config/sublime-text-3/Installed\ Packages https://sublime.wbond.net/Package%20Control.sublime-package
 cp $CONFIGS/*.sublime-settings ~/.config/sublime-text-3/Packages/User
@@ -179,6 +183,7 @@ if [ $DEV = true ]; then
         "oracle-java8-set-default"
         "python3-pip"
         "brackets"
+        "httpie"
         "gns3-gui"
         "gns3-iou"
         # "icedtea-7-plugin"
