@@ -85,8 +85,8 @@ for a in parsed:
     else:
         finalName = name
     # Download
-    # with open(finalName, "wb") as file:
-    #     response = s.get(url_full)
-    #     file.write(response.content)
+    with open(finalName, "wb") as file:
+        response = s.get(url_full)
+        file.write(response.content)
 
 print("Done")
