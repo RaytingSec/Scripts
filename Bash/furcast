@@ -18,7 +18,7 @@ while [ $CURRENT -le $END ]; do
     URL_FULL=$URL_CONTENT$TITLE
     LOG=$DIR/$NAME_START$CURRENT".log"
     touch $LOG
-    wget -nv -o $LOG -P $DIR $URL_FULL &
+    wget -nv -o $LOG -P $DIR $URL_FULL --progress=bar &
     echo "Started job for $TITLE"
     let "CURRENT++"
 done
