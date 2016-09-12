@@ -10,7 +10,7 @@ for code1 in codes:
     for code2 in codes[progression:]:
         xored = bin(int(code1, 2) ^ int(code2, 2))
         row.append(xored.count("1"))
-    print(''.join([str(distance)+',' for distance in row]))
+    print(''.join([str(distance) + ',' for distance in row]))
     progression += 1
 
 """ HW1 Output
