@@ -2,18 +2,17 @@
 # OpenVPN script
 # Connects to vpn via openvpn, includes tools for configuring DNS
 
-
-DIR=/home/$USER/.vpn # directory for all your config files
-
-CONFIG=nl01-443-128b.ovpn
+#CONFIG=nl01-443-128b.ovpn
 #CONFIG=ro01-443-128b.ovpn
 #CONFIG=ro-256b.ovpn
 #CONFIG=us-128b.ovpn
 #CONFIG=us-ca01-128b.ovpn
 #CONFIG=us-ca01-443-128b.ovpn
 #CONFIG=us-443-128b.ovpn
+CONFIG="US Silicon Valley.ovpn"
 
 AUTH=login
+DIR=$HOME/.vpn
 
 # DNS
 set_dns () {
@@ -23,7 +22,8 @@ set_dns () {
 # Connect to vpn
 vpn_connect () {
     firefox -private whatismyipaddress.com & # Test vpn connection
-    sudo openvpn --config $DIR/$CONFIG --auth-user-pass $DIR/$AUTH --auth-nocache;
+    cd $DIR
+    sudo openvpn --config "$CONFIG" --auth-user-pass "$AUTH" --auth-nocache;
 }
 
 # Default start vpn
@@ -39,7 +39,8 @@ elif [ "$1" == "-d" ]; then
 elif [ "$1" == "--help" ]; then # help text
     echo "Utilities for connecting to a vpn using OpenVPN"
     echo "Options:"
-    echo "    -c        c for cat, cat current resolv.conf"
+    echo "    -c        Show current resolv.conf"
+    echo "    -d        Change DNS servers to Google's 8.8.8.8 and 8.8.4.4"
     echo "    (blank)   connect to vpn and sets dns"
     echo ""
 # unknown
