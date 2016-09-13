@@ -36,6 +36,10 @@ ln -s ~/Dropbox/Code/ ~/code
 ln -s ~/code/Scripts/Bash/ ~/bin
 ln -s $DATA/dev ~/dev
 ln -s $DATA/vm/ ~/vmware
+ln -s ~/code/Scripts/Python py
+ln -s ~/code/Challenges/Cryptopals crypto
+ln -s ~/code/Coursework/CS100W/ 100w
+ln -s ~/code/Coursework/CS152/ 152
 
 # Relocate dirs from ~/ to ~/data
 USERLIBS=(
