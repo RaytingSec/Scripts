@@ -21,6 +21,7 @@ set_dns () {
 
 # Connect to vpn
 vpn_connect () {
+    sudo pwd >> null # get sudo priv
     firefox -private whatismyipaddress.com & # Test vpn connection
     cd $DIR
     sudo openvpn --config "$CONFIG" --auth-user-pass "$AUTH" --auth-nocache;
