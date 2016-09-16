@@ -31,15 +31,21 @@ else
 fi
 
 # Link to common dirs
+ln -s $DATA/vm/ ~/vmware
+ln -s $DATA/dev ~/dev
 ln -s $DATA/Dropbox ~/Dropbox
 ln -s ~/Dropbox/Code/ ~/code
+
 ln -s ~/code/Scripts/Bash/ ~/bin
-ln -s $DATA/dev ~/dev
-ln -s $DATA/vm/ ~/vmware
-ln -s ~/code/Scripts/Python py
-ln -s ~/code/Challenges/Cryptopals crypto
-ln -s ~/code/Coursework/CS100W/ 100w
-ln -s ~/code/Coursework/CS152/ 152
+ln -s ~/code/Scripts/Python ~/py
+
+# Temporary links
+ln -s ~/Dropbox/Documents/SJSU/Courses ~/courses
+ln -s ~/code/Coursework/CS100W/ ~/100w
+ln -s ~/code/Coursework/CS152/ ~/152
+
+ln -s ~/code/Challenges/Cryptopals ~/crypto
+ln -s ~/code/Challenges/Stockfighter ~/stock
 
 # Relocate dirs from ~/ to ~/data
 USERLIBS=(
