@@ -99,7 +99,7 @@ sudo mv ~/inputrc /etc/inputrc
 
 # sublime
 wget -P ~/.config/sublime-text-3/Installed\ Packages https://sublime.wbond.net/Package%20Control.sublime-package
-cp $CONFIGS/*.sublime-settings ~/.config/sublime-text-3/Packages/User
+cp $CONFIGS/sublime/* ~/.config/sublime-text-3/Packages/User/
 
 # Packages
 HOST=true
