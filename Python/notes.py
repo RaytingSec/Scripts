@@ -10,7 +10,9 @@ if len(sys.argv) > 1:
 
 date = str(datetime.datetime.now().date())
 
-result = "{}\n{}\n".format(date, title)
+result = date + '\n'
+if len(sys.argv) > 1:
+    result += title + '\n'
 result += '=' * 30 + '\n\n'
 result += '## '
 
