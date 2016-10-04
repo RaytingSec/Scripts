@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# Streaming stock quotes using yahoo api
+
 import time
 from requests import get
 import sys

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Create template notes txt file
 
 import datetime
