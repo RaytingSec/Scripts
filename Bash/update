@@ -1,14 +1,14 @@
 #!/bin/bash
 # Simple script to update packages on machine
 
-if [ "$1" == "" ]; then # Update repos
+if [[ "$1" == "" ]]; then # Update repos
     sudo apt update
     apt list --upgradable
     # alert
-elif [ "$1" == "--upgrade" ] || [ "$1" == "-u" ] ; then # Upgrade packages
+elif [[ "$1" == "--upgrade" ]] || [[ "$1" == "-u" ]] ; then # Upgrade packages
     sudo apt upgrade
     # alert
-elif [ "$1" == '--help' ]; then # help text
+elif [[ "$1" == '--help' ]]; then # help text
     echo "Sends update and upgrade commands to apt"
     echo "Options:"
     echo "    (blank)   ask and output for upgrades only"
