@@ -14,26 +14,27 @@ else:
 url = "http://download.finance.yahoo.com/d/quotes.csv?s={}&f=l1c1".format(ticker)
 
 
-def getQuote(q):
+def getQuote(ticker):
     # '24.86,+5.46'
-    q = q.split(',')
-    price = float(q[0])
-    change = float(q[1])
-    perc = (change / price).__round__(2)
+    req = get(url.format(ticker)).text.strip('\n')
+    req = req.split(',')
+    price = float(req[0])
+    change = float(req[1])
+    perc = change / price
+    # perc = round(change / price, 4)
     return (price, change, perc)
 
 
 def prettyPrint(quote):
     price = str(quote[0])
-    change = quote[1]
-    perc = str((quote[2] * 100.0).__round__(4))
 
+    change = quote[1]
     if change > 0:
         change = '+' + str(change)
-    # elif change < 0:
-    #     change = '-' + str(change)
     else:
         change = str(change)
+
+    perc = str(round(quote[2] * 100, 2))
     perc += '%'
 
     result = "({}, {}, {})".format(price, change, perc)
@@ -43,8 +44,7 @@ def prettyPrint(quote):
 
 while True:
     try:
-        req = get(url).text.strip('\n')
-        quote = getQuote(req)
+        quote = getQuote(ticker)
         # print(quote)
         print(prettyPrint(quote))
         time.sleep(2)
