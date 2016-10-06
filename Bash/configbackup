@@ -23,7 +23,7 @@ cp -a $CONFIG/fox.cow $BACKUP
 cp -a $CONFIG/.gitconfig $BACKUP
 cp -a $CONFIG/.vimrc $BACKUP
 cp -a $CONFIG/inputrc $BACKUP
-cp -a $CONFIG/*.sublime* $BACKUP/sublime
+cp -ar $CONFIG/sublime $BACKUP/sublime
 cp -a $CONFIG/KDE4_keymap.kksrc $BACKUP
 cp -a $CONFIG/KDE5_keymap.kksrc $BACKUP
 
