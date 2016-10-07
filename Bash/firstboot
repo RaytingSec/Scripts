@@ -139,7 +139,7 @@ PACKAGES+=(
     "hping3"
     "lynx-cur"
     "git"
-    "fonts-hack-ttf"
+    "fonts-hack-otf"
     "libnotify-bin"
     "scanmem"
     "python-software-properties"
