@@ -103,7 +103,7 @@ cp $CONFIGS/sublime/* ~/.config/sublime-text-3/Packages/User/
 
 # Packages
 HOST=true
-VM=false
+VM=true
 DEV=true
 SERV=false
 UNITY=false
@@ -135,6 +135,7 @@ PACKAGES+=(
     "traceroute"
     "nmap"
     "openvpn"
+    "sshfs"
     "curl"
     "hping3"
     "lynx-cur"
