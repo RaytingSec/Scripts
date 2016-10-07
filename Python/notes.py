@@ -6,6 +6,7 @@ from subprocess import call
 import sys
 
 title = ""
+ext = "md"
 if len(sys.argv) > 1:
     title = sys.argv[1]
 
@@ -20,6 +21,7 @@ result += '## '
 filename = "{}".format(date)
 if len(sys.argv) > 1:
     filename = "{} {}".format(date, title)
+filename += "." + ext
 
 with open(filename, "w") as file:
     file.write(result)
