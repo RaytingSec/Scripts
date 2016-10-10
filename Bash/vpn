@@ -44,7 +44,8 @@ elif [[ "$1" == "--help" ]]; then # help text
     echo "Options:"
     echo "    -c        Show current resolv.conf"
     echo "    -d        Change DNS servers to Google's 8.8.8.8 and 8.8.4.4"
-    echo "    (blank)   connect to vpn and sets dns"
+    echo "    -k        Kill the vpn connection"
+    echo "    (blank)   connect to vpn and without setting dns"
     echo ""
 # unknown
 else
