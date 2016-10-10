@@ -43,6 +43,8 @@ ln -s ~/code/Scripts/Python ~/py
 ln -s ~/Dropbox/Documents/SJSU/Courses ~/courses
 ln -s ~/code/Coursework/CS100W/ ~/100w
 ln -s ~/code/Coursework/CS152/ ~/152
+ln -s ~/code/Coursework/CS158B/ ~/158b
+ln -s ~/code/Coursework/CS185C/ ~/185c
 
 ln -s ~/code/Challenges/Cryptopals ~/crypto
 ln -s ~/code/Challenges/Stockfighter ~/stock
@@ -56,21 +58,10 @@ USERLIBS=(
     Videos
 )
 for DIR in "${USERLIBS[@]}"; do
+    # ls -alhF $DIR
     rm -r $HOME/$DIR
     ln -s $DATA/$DIR $HOME/$DIR
 done
-
-# rm -r $HOME/Documents
-# rm -r $HOME/Downloads
-# rm -r $HOME/Music
-# rm -r $HOME/Pictures
-# rm -r $HOME/Videos
-
-# ln -s $DATA/Documents $HOME/Documents
-# ln -s $DATA/Downloads $HOME/Downloads
-# ln -s $DATA/Music $HOME/Music
-# ln -s $DATA/Pictures $HOME/Pictures
-# ln -s $DATA/Videos $HOME/Videos
 
 # Torrent dirs
 # mkdir -p $DATA/Torrent/down
@@ -81,21 +72,20 @@ done
 
 # Configs
 
-CONFIGS=$DATA/configs
+CONFIGS=$HOME/code/Linux-Config
 
 # general configs
-mv $CONFIGS/.* ~/
+cp $CONFIGS/.* ~/
 
 # vim
 mkdir -p ~/.vim/colors
-cp $CONFIGS/molokai.vim ~/.vim/colors
+mv $CONFIGS/molokai.vim ~/.vim/colors
 
 # cowsay
 sudo cp $CONFIGS/fox.cow /usr/share/cowsay/cows/
 
 # inputrc
-cat /etc/inputrc $CONFIGS/inputrc >> ~/inputrc
-sudo mv ~/inputrc /etc/inputrc
+printf '\nset completion-ignore-case On' | sudo -E tee /etc/inputrc > /dev/null
 
 # sublime
 wget -P ~/.config/sublime-text-3/Installed\ Packages https://sublime.wbond.net/Package%20Control.sublime-package
@@ -112,7 +102,6 @@ CIN=false
 
 REPOS=()
 PACKAGES=()
-
 # General
 REPOS+=(
     "ppa:webupd8team/sublime-text-3"
@@ -193,9 +182,12 @@ if [ $DEV = true ]; then
         "oracle-java8-set-default"
         "icedtea-plugin"
         "icedtea-8-plugin"
+        "python3-pip"
+        "python3-bs4"
+        "python3-requests"
+        "python3-crypto"
         "nodejs"
         "npm"
-        "python3-pip"
         "brackets"
         "httpie"
         "sqlitebrowser"
@@ -252,7 +244,7 @@ elif [ $CIN = true ]; then
 fi
 
 for R in "${REPOS[@]}"; do
-    echo "sudo add-apt-repository -y"$R
+    echo "sudo add-apt-repository -y "$R
 done
 
 SELECTED=""
@@ -262,4 +254,5 @@ done
 echo "sudo apt install "$SELECTED
 
 # Python development
-sudo -H pip3 install requests[security]
+sudo -H pip3 install --upgrade pip3
+sudo -H pip3 install setuptools requests[security]
