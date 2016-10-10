@@ -7,5 +7,6 @@ function someFunction
     echo "You have entered a function"
 }
 
-echo "some stuff"
+echo "Start"
 someFunction
+echo "End"

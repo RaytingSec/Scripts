@@ -1,0 +1,11 @@
+#!/bin/bash
+# Example of simple array behavior
+ARRAY=(
+    "First"
+    "Second"
+    "Third"
+    "Fourth"
+)
+for ELEMENT in "${ARRAY[@]}"; do
+    echo "Currently on: "$ELEMENT
+done

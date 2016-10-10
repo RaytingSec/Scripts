@@ -1,10 +1,8 @@
 #!/bin/bash
 # example if else statement
-if [ "$1" = "1" ]
-then
+if [[ "$1" = "1" ]]; then
     echo "case 1"
-elif [ "$1" = "2" ]
-then
+elif [[ "$1" = "2" ]]; then
     echo "case 2"
 else
     echo "else case, input: $1"

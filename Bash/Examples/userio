@@ -2,5 +2,6 @@
 # Example that uses: variables, user io
 echo -e "Please enter your name: "
 read name
-echo "Nice to meet you $name"
+echo "Nice to meet you $name" # Inside quotes
+echo "Nice to meet you "$name # or outside
 
