@@ -188,6 +188,7 @@ if [ $DEV = true ]; then
         "python3-crypto"
         "nodejs"
         "npm"
+        "node-typescript"
         "brackets"
         "httpie"
         "sqlitebrowser"

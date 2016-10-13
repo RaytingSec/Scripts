@@ -2,8 +2,7 @@
 # Example of using a function
 
 # Note functions declation is before it's usage
-function someFunction
-{
+function someFunction {
     echo "You have entered a function"
 }
 
