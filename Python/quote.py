@@ -47,7 +47,7 @@ while True:
         quote = getQuote(ticker)
         # print(quote)
         print(prettyPrint(quote))
-        time.sleep(2)
+        time.sleep(5)
     except KeyboardInterrupt:
         print("\nExiting")
         sys.exit()
