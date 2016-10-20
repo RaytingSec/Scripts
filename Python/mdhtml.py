@@ -7,18 +7,18 @@ import os
 from bs4 import BeautifulSoup as bsoup
 import markdown
 
-mdfile = sys.argv[1]
-if not os.path.isfile(mdfile):
-    sys.exit("File doesn't exist:\n" + mdfile)
+# File argument
+file_md = sys.argv[1]
+if not os.path.isfile(file_md):
+    sys.exit("File doesn't exist:\n" + file_md)
 
-with open(mdfile, 'r') as file:
-    mdcontent = file.read()
+with open(file_md, 'r') as file:
+    content_md = file.read()
 
-md = markdown.Markdown(output_format='html5')
-htmlcontent = md.convert(mdcontent)
-htmlpretty = bsoup(htmlcontent, 'lxml').prettify()
+# Process content
+content_html = bsoup(markdown.markdown(content_md), 'lxml').prettify()
+content_html += '\n'  # EOF newline
+file_html = os.path.splitext(file_md)[0] + '.html'
 
-htmlfile = os.path.splitext(mdfile)[0] + '.html'
-
-with open(htmlfile, 'w') as file:
-    file.write(htmlpretty)
+with open(file_html, 'w') as file:
+    file.write(content_html)
