@@ -184,6 +184,7 @@ if [ $DEV = true ]; then
         "icedtea-8-plugin"
         "python3-pip"
         "python3-bs4"
+        "python3-markdown"
         "python3-requests"
         "python3-crypto"
         "nodejs"
