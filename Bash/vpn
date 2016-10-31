@@ -7,8 +7,13 @@
 #CONFIG=ro-256b.ovpn
 #CONFIG=us-128b.ovpn
 #CONFIG=us-ca01-128b.ovpn
-CONFIG=us-ca01-443-128b.ovpn
+#CONFIG=us-ca01-443-128b.ovpn
 #CONFIG=us-443-128b.ovpn
+CONFIG=us249.nordvpn.com.udp1194.ovpn
+#CONFIG=us237.nordvpn.com.tcp443.ovpn
+#CONFIG=us-ca2.nordvpn.com.tcp443.ovpn
+#CONFIG=nl2.nordvpn.com.tcp443.ovpn
+# should implement complex parameter parsing an not type in all configs :(
 
 AUTH=login
 DIR=$HOME/.vpn
@@ -23,7 +28,7 @@ vpn_connect () {
     sudo pwd >> null # get sudo priv
     firefox -private whatismyipaddress.com & # Test vpn connection
     cd $DIR
-    sudo openvpn --config "$CONFIG" --auth-user-pass "$AUTH" --auth-nocache &
+    sudo openvpn --config "$CONFIG" --auth-user-pass "$AUTH" --auth-nocache
 }
 
 # Default start vpn
@@ -52,3 +57,4 @@ else
     echo "option '$1' not recognized."
     echo "'--help' gives usage information."
 fi
+

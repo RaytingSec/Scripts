@@ -187,6 +187,8 @@ if [ $DEV = true ]; then
         "python3-markdown"
         "python3-requests"
         "python3-crypto"
+        # "python3-nacl"
+        # "python-keyczar"
         "nodejs"
         "npm"
         "node-typescript"

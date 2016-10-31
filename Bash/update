@@ -6,7 +6,7 @@ if [[ "$1" == "" ]]; then # Update repos
     apt list --upgradable
     # alert
 elif [[ "$1" == "--upgrade" ]] || [[ "$1" == "-u" ]] ; then # Upgrade packages
-    sudo apt upgrade
+    sudo apt dist-upgrade -y
     # alert
 elif [[ "$1" == '--help' ]]; then # help text
     echo "Sends update and upgrade commands to apt"
@@ -18,3 +18,4 @@ else
     echo "option '$1' not recognized."
     echo "'--help' gives usage information."
 fi
+
