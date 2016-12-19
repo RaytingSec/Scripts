@@ -111,35 +111,37 @@ PACKAGES+=(
     "fortune"
     "cowsay"
     "fortunes"
-    "fortunes-debian-hints"
-    "fortunes-off"
-    "fortunes-spam"
-    "fortunes-ubuntu-server"
+    # "fortunes-debian-hints"
+    # "fortunes-off"
+    # "fortunes-spam"
+    # "fortunes-ubuntu-server"
     "lolcat"
+    "tmux"
     "htop"
     "atop"
-    "whois"
-    "finger"
     "tree"
+    "finger"
+    "whois"
     "traceroute"
     "nmap"
-    "openvpn"
-    "sshfs"
-    "curl"
     "hping3"
+    "curl"
+    "sshfs"
+    "openvpn"
     "lynx-cur"
     "git"
     "fonts-hack-otf"
     "libnotify-bin"
     "scanmem"
-    "python-software-properties"
-    "software-properties-common"
+    # May be needed for adding repos
+    # "python-software-properties"
+    # "software-properties-common"
     "gpart"
     "gparted"
     "sublime-text-installer"
     "synaptic"
-    "wireshark"
-    # Just for kicks
+    "hexchat"
+    # For fun
     "bsdgames"
     "bsdgames-nonfree"
 )
@@ -151,13 +153,12 @@ if [ $HOST = true ]; then
         "ppa:maarten-baert/simplescreenrecorder"
     )
     PACKAGES+=(
-        "xdotool"
+        "cpufrequtils"
         "youtube-dl"
         "libav-tools"
-        "cpufrequtils"
-        "hexchat"
         "vlc"
-        "keepass2"
+        "keepassx"
+        # "xdotool"
         "steam"
         "simplescreenrecorder"
         "nautilus-dropbox"
@@ -180,11 +181,14 @@ if [ $DEV = true ]; then
         "ppa:gns3/ppa"
     )
     PACKAGES+=(
-        # Development
+        # JDK
         "oracle-java8-installer"
         "oracle-java8-set-default"
+        # Plugins and stuff
         "icedtea-plugin"
         "icedtea-8-plugin"
+        # "flashplugin-installer"
+        # Python
         "python3-pip"
         "python3-bs4"
         "python3-markdown"
@@ -203,8 +207,6 @@ if [ $DEV = true ]; then
         "sqlitebrowser"
         "gns3-gui"
         "gns3-iou"
-        # "icedtea-7-plugin"
-        # "flashplugin-installer"
         # Security
         "sox"
         "libsox-fmt-mp3"
@@ -213,6 +215,7 @@ if [ $DEV = true ]; then
         "sqlmap"
         "masscan"
         "zmap"
+        "wireshark"
         "radare2"
     )
 fi
