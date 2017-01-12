@@ -4,10 +4,10 @@
 # The following will download episodes 1, 2, and 3
 # $ bash techsnap 1 3
 
-URL_CONTENT="http://www.podtrac.com/pts/redirect.mp3/traffic.libsyn.com/jbmirror/"
-# jupiterbroadcasting
-# jnite
-# jbmirror
+# mirror="jupiterbroadcasting"
+# mirror="jnite"
+mirror="jbmirror"
+URL_CONTENT="http://www.podtrac.com/pts/redirect.mp3/traffic.libsyn.com/$mirror/"
 NAME_START="techsnap-0"
 NAME_END=".mp3"
 DIR=~/wget

@@ -4,7 +4,7 @@
 # The following will download episodes 1, 2, and 3
 # $ bash furcast 1 3
 
-URL_CONTENT="http://content.xanacreations.com/furcast/ep/"
+URL_CONTENT="https://content.xanacreations.com/furcast/ep/"
 NAME_START="fc-"
 NAME_END=".mp3"
 DIR=~/wget
