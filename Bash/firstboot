@@ -124,6 +124,7 @@ PACKAGES+=(
     "whois"
     "traceroute"
     "nmap"
+    # General network utilities    
     "hping3"
     "curl"
     "sshfs"
@@ -131,8 +132,11 @@ PACKAGES+=(
     "lynx-cur"
     "git"
     "fonts-hack-otf"
-    "libnotify-bin"
     "scanmem"
+    # Administration things
+    "libnotify-bin"
+    "inotify-tools" # inotifywait
+    "iptstate"
     # May be needed for adding repos
     # "python-software-properties"
     # "software-properties-common"
