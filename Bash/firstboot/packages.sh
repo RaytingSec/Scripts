@@ -1,104 +1,6 @@
 #!/bin/bash
-# Configure a fresh Linux installation
 
-# Debian Drivers if they're ever needed
-function DebDrivers {
-    # Add repos
-    echo "
-    deb http://ftp.de.debian.org/debian/ jessie main non-free contrib
-    # deb-src http://ftp.de.debian.org/debian/ jessie main non-free contrib
-
-    deb http://security.debian.org/ jessie/updates main contrib non-free
-    # deb-src http://security.debian.org/ jessie/updates main contrib non-free
-    " >> /etc/apt/sources.list
-
-    sudo apt update && sudo apt firmware-iwlwifi firmware-realtek
-}
-
-# Libraries
-
-DATA=/home/$USER/Data
-
-# Find data dir
-if [ -d "/data" ]; then
-    ln -s /data ~/Data
-    echo "Using /data"
-elif [ -d $DATA ]; then
-    echo "Using ~/data"
-else
-    echo "No data directory found, exiting"
-    exit 1
-fi
-
-# Link to common dirs
-ln -s $DATA/vm/ ~/vmware
-ln -s $DATA/dev ~/dev
-ln -s $DATA/Dropbox ~/Dropbox
-ln -s ~/Dropbox/Code/ ~/code
-
-ln -s ~/code/Scripts/Bash/ ~/bin
-ln -s ~/code/Scripts/Python ~/py
-
-# Temporary links
-ln -s ~/Dropbox/Documents/SJSU/Courses ~/courses
-ln -s ~/code/Coursework/CS100W/ ~/100w
-ln -s ~/code/Coursework/CS152/ ~/152
-ln -s ~/code/Coursework/CS158B/ ~/158b
-ln -s ~/code/Coursework/CS185C/ ~/185c
-
-ln -s ~/code/Challenges/Cryptopals ~/crypto
-ln -s ~/code/Challenges/Stockfighter ~/stock
-
-# Relocate dirs from ~/ to ~/data
-USERLIBS=(
-    Documents
-    Downloads
-    Music
-    Pictures
-    Videos
-)
-for DIR in "${USERLIBS[@]}"; do
-    # ls -alhF $DIR
-    rm -r $HOME/$DIR
-    ln -s $DATA/$DIR $HOME/$DIR
-done
-
-# Torrent dirs
-# mkdir -p $DATA/Torrent/down
-# mkdir -p $DATA/Torrent/fin
-# mkdir -p $DATA/Torrent/srcdown
-# mkdir -p $DATA/Torrent/srcfin
-# mkdir -p $DATA/Torrent/srcload
-
-# Configs
-
-CONFIGS=$HOME/code/Linux-Config
-
-# general configs
-cp $CONFIGS/.* ~/
-
-# vim
-mkdir -p ~/.vim/colors
-mv $CONFIGS/molokai.vim ~/.vim/colors
-
-# cowsay
-sudo cp $CONFIGS/fox.cow /usr/share/cowsay/cows/
-
-# inputrc
-printf '\nset completion-ignore-case On' | sudo -E tee /etc/inputrc > /dev/null
-
-# sublime
-wget -P ~/.config/sublime-text-3/Installed\ Packages https://sublime.wbond.net/Package%20Control.sublime-package
-cp $CONFIGS/sublime/* ~/.config/sublime-text-3/Packages/User/
-
-# Packages
-HOST=true
-VM=true
-DEV=true
-SERV=false
-UNITY=false
-XFCE=false
-CIN=false
+# Some getopts magic that creates repo and packages list
 
 REPOS=()
 PACKAGES=()
@@ -225,11 +127,18 @@ if [ $DEV = true ]; then
 fi
 
 # Server
-if [ $SERV = true ]; then
+if [ $SERVER = true ]; then
+    REPO+=(
+        "ppa:transmissionbt/ppa"
+    )
     PACKAGES+=(
         "ssh"
         "mysql-server"
         "mysql-workbench"
+        # Transmission stuff if building a seed box
+        "transmission-cli"
+        "transmission-daemon"
+        "transmission-common"
     )
 fi
 
@@ -238,6 +147,14 @@ if [ $UNITY = true ]; then
     PACKAGES+=(
         "unity-tweak-tool"
         "gnome-color-chooser"
+    )
+# KDE
+if [ $KDE = true ]; then
+    REPOS+=(
+        "ppa:kubuntu-ppa/backports"
+    )
+    PACKAGES+=(
+        "kubuntu-desktop"
     )
 # XFCE
 elif [ $XFCE = true ]; then
@@ -269,6 +186,9 @@ for P in "${PACKAGES[@]}"; do
     SELECTED+=$P" "
 done
 echo "sudo apt install "$SELECTED
+
+
+# Don't forget python packages
 
 # Python development
 sudo -H pip3 install --upgrade pip3
