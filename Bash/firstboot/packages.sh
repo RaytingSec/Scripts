@@ -17,10 +17,10 @@ PACKAGES+=(
     # "fortunes-off"
     # "fortunes-spam"
     # "fortunes-ubuntu-server"
-    "lolcat"
+    # "lolcat"
     "tmux"
     "htop"
-    "atop"
+    # "atop"
     "tree"
     "finger"
     "whois"
@@ -69,6 +69,9 @@ if [ $HOST = true ]; then
         "simplescreenrecorder"
         "nautilus-dropbox"
         "audacity"
+        # chrome
+        "libappindicator1"
+        "libindicator7"
     )
 # VM
 elif [ $VM = true ]; then
@@ -142,27 +145,25 @@ if [ $SERVER = true ]; then
     )
 fi
 
-# Unity
-if [ $UNITY = true ]; then
+if [[ "$DE" == "unity" ]]; then
     PACKAGES+=(
         "unity-tweak-tool"
         "gnome-color-chooser"
     )
-# KDE
-if [ $KDE = true ]; then
+elif [[ "$DE" == "gnome" ]]; then
+    echo "Nothing to do for gnome yet..."
+elif [[ "$DE" == "kde" ]]; then
     REPOS+=(
         "ppa:kubuntu-ppa/backports"
     )
     PACKAGES+=(
         "kubuntu-desktop"
     )
-# XFCE
-elif [ $XFCE = true ]; then
+elif [[ "$DE" == "xfce" ]]; then
     PACKAGES+=(
         "thunar-dropbox-plugin"
     )
-# Cinnamon
-elif [ $CIN = true ]; then
+elif [[ "$DE" == "cinnamon" ]]; then
     REPOS+=(
         "ppa:tsvetko.tsvetkov/cinnamon"
     )
@@ -175,6 +176,8 @@ elif [ $CIN = true ]; then
         "mint-themes"
         "cinnamon-session"
     )
+else
+    echo "Unknown desktop environment $DE"
 fi
 
 for R in "${REPOS[@]}"; do

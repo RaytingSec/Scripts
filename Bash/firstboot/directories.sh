@@ -30,7 +30,7 @@ elif [[ "$1" == "--symlinks" ]]; then
     ln -s ~/code/Scripts/Bash/ ~/bin
     ln -s ~/code/Scripts/Python ~/py
 
-    ln -s ~/code/Challenges/Cryptopals ~/crypto
+    ln -s ~/code/Challenges/cryptopals ~/crypto
     ln -s ~/code/Challenges/Stockfighter ~/stock
 
     ln -s ~/Dropbox/Documents/SJSU/Courses ~/courses

@@ -6,9 +6,11 @@ HOST=true
 VM=true
 DEV=true
 SERVER=false
-UNITY=false
-XFCE=false
-CIN=false
+
+# Desktop environments
+# Options: unity, gnome, kde, xfce, cinamon
+DESKTOP_ENV='kde'
+# Use getopts
 
 # Libraries
 
@@ -34,4 +36,14 @@ bash ./directories.sh
 bash ./configure.sh
 
 # Install packages
-bash ./packages.sh
+bash ./packages.sh --setup --desktop-env $DESKTOP_ENV
+bash ./packages.sh --install
+
+
+
+# If this turns into a makefile...
+# make drivers
+# make dirs
+# make configs
+# make packages
+# make install
