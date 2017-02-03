@@ -1,0 +1,40 @@
+## Base
+
+vim
+tree
+sshfs
+git
+curl
+software-properties-common
+colordiff
+
+htop
+jnettop
+iotop
+
+nmap
+httpie
+whois
+
+fortunes
+cowsay
+
+openvpn
+
+## Host
+
+vlc
+fonts-hack-otf
+
+## Non host
+
+ssh
+
+## Server
+
+iptstate
+
+## vm
+
+open-vm-tools-desktop
+#open-vm-tools-dkms
