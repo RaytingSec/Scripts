@@ -18,6 +18,15 @@ CONFIG=us-443-128b.ovpn
 AUTH=login
 DIR=$HOME/.vpn
 
+helptext="Utilities for connecting to a vpn using OpenVPN
+Options:
+    -c        Show current resolv.conf
+    -d        Change DNS servers to Google's 8.8.8.8 and 8.8.4.4
+    -k        Kill the vpn connection
+    (blank)   connect to vpn and without setting dns
+"
+
+
 # DNS
 set_dns () {
     # Google
@@ -48,13 +57,7 @@ elif [[ "$1" == "-k" ]]; then
     sudo pkill -KILL vpn
 # help
 elif [[ "$1" == "--help" ]]; then # help text
-    echo "Utilities for connecting to a vpn using OpenVPN"
-    echo "Options:"
-    echo "    -c        Show current resolv.conf"
-    echo "    -d        Change DNS servers to Google's 8.8.8.8 and 8.8.4.4"
-    echo "    -k        Kill the vpn connection"
-    echo "    (blank)   connect to vpn and without setting dns"
-    echo ""
+    echo "$helptext"
 # unknown
 else
     echo "option '$1' not recognized."
