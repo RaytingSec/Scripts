@@ -4,6 +4,8 @@
 if [[ "$1" == "" ]]; then # Update repos
     sudo apt update
     apt list --upgradable
+elif [[ "$1" == "-l" ]]; then
+    apt list --upgradable
     # alert
 elif [[ "$1" == "--upgrade" ]] || [[ "$1" == "-u" ]] ; then # Upgrade packages
     sudo apt dist-upgrade -y
