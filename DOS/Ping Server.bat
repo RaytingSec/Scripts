@@ -1,1 +1,0 @@
-ping raydarnet.info.tm -t
