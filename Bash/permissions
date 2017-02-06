@@ -1,5 +1,9 @@
-sudo chown rayting * . -R
-sudo chgrp rayting * -R
+#!/bin/bash
+# Help set permissions when things are messed up. Runs on working dir. Make sure you're in the right dir or you'll screw yourself in a recursive manner
+
+usr=$(whoami)
+
+sudo chown $usr * . -R
+sudo chgrp $usr * -R
 find . -type d -exec chmod 755 {} \;
 find . -type f -exec chmod 644 {} \;
-
