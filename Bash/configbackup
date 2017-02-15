@@ -2,7 +2,8 @@
 # Handles backup of config files
 
 WORKING_DIR=/home/$USER/code
-CONFIG=$WORKING_DIR/Linux-Config
+linux_config=$WORKING_DIR/linux-config
+sublime_config=$WORKING_DIR/sublime-config
 BACKUP=$WORKING_DIR/configs
 TARFILE=configs.tar.gz
 
@@ -14,18 +15,19 @@ if [ -e "$TARFILE" ]; then
 fi
 
 # Bash configs
-cp -a $CONFIG/.bash_aliases $BACKUP
-cp -a $CONFIG/.bash_motd $BACKUP
-cp -a $CONFIG/.bashrc $BACKUP
+cp -a $linux_config/.bash_aliases $BACKUP
+cp -a $linux_config/.bash_motd $BACKUP
+cp -a $linux_config/.bashrc $BACKUP
 
 # Other configs
-cp -a $CONFIG/fox.cow $BACKUP
-cp -a $CONFIG/.gitconfig $BACKUP
-cp -a $CONFIG/.vimrc $BACKUP
-cp -a $CONFIG/inputrc $BACKUP
-cp -ar $CONFIG/sublime $BACKUP/sublime
-cp -a $CONFIG/KDE4_keymap.kksrc $BACKUP
-cp -a $CONFIG/KDE5_keymap.kksrc $BACKUP
+cp -a $linux_config/fox.cow $BACKUP
+cp -a $linux_config/.gitconfig $BACKUP
+cp -a $linux_config/.vimrc $BACKUP
+cp -a $linux_config/inputrc $BACKUP
+cp -a $linux_config/KDE4_keymap.kksrc $BACKUP
+cp -a $linux_config/KDE5_keymap.kksrc $BACKUP
+
+cp -ar $sublime_config $BACKUP/sublime
 
 # External configs
 cp -a $WORKING_DIR/External/molokai/colors/molokai.vim $BACKUP
@@ -34,4 +36,4 @@ cp -a $WORKING_DIR/Scripts/Bash/firstboot $BACKUP
 
 sleep 0.1
 tar czvf $TARFILE -C $WORKING_DIR configs
-rm -r $BACKUP
+rm -rf $BACKUP
