@@ -1,9 +1,12 @@
 #!/bin/bash
-# Help set permissions when things are messed up. Runs on working dir. Make sure you're in the right dir or you'll screw yourself in a recursive manner
+# Help set permissions when things are messed up
+# Runs on working dir. Make sure you're in the right dir or you'll screw yourself in a recursive manner
+# Preset permissions may not be optimal for your use case. Adapt the script accordingly.
 
 usr=$(whoami)
 
+# All files/folders, AND current dir
 sudo chown $usr * . -R
-sudo chgrp $usr * -R
-find . -type d -exec chmod 755 {} \;
-find . -type f -exec chmod 644 {} \;
+sudo chgrp $usr * . -R
+find . -type d -exec chmod 775 {} \;
+find . -type f -exec chmod 664 {} \;
