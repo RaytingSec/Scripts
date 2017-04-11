@@ -1,29 +1,43 @@
 #!/usr/bin/python3
-# Create template notes txt file
 
 import datetime
-from subprocess import call
+import subprocess
 import sys
 
-title = ''
-ext = 'md'
-if len(sys.argv) > 1:
+h = """General purpose markdown generator for date-sensitive notes
+\tUsage: notes [title]
+"""
+
+if len(sys.argv) > 2:
+    print(h)
+    sys.exit('Too many parameters!')
+elif len(sys.argv) == 2:
     title = sys.argv[1]
+else:
+    title = ''
+
 
 date = datetime.date.today().isoformat()
-
 result = date + '\n'
-if len(sys.argv) > 1:
+if title:
     result += title + '\n'
-result += '=' * 30 + '\n\n'
-result += '## '
 
-filename = '{}'.format(date)
-if len(sys.argv) > 1:
+# result += '=' * 30 + '\n\n'
+# result += '## '
+
+result += """==============================
+
+## 
+"""
+
+if title:
     filename = '{} {}'.format(date, title)
-filename += '.' + ext
+else:
+    filename = date
+
+filename += '.md'
 
 with open(filename, 'w') as file:
     file.write(result)
 
-call(['subl', filename])
+subprocess.call(['subl', filename])
