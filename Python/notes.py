@@ -5,12 +5,12 @@ import datetime
 from subprocess import call
 import sys
 
-title = ""
-ext = "md"
+title = ''
+ext = 'md'
 if len(sys.argv) > 1:
     title = sys.argv[1]
 
-date = str(datetime.datetime.now().date())
+date = datetime.date.today().isoformat()
 
 result = date + '\n'
 if len(sys.argv) > 1:
@@ -18,12 +18,12 @@ if len(sys.argv) > 1:
 result += '=' * 30 + '\n\n'
 result += '## '
 
-filename = "{}".format(date)
+filename = '{}'.format(date)
 if len(sys.argv) > 1:
-    filename = "{} {}".format(date, title)
-filename += "." + ext
+    filename = '{} {}'.format(date, title)
+filename += '.' + ext
 
-with open(filename, "w") as file:
+with open(filename, 'w') as file:
     file.write(result)
 
-call(["subl", filename])
+call(['subl', filename])
