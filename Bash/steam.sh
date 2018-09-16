@@ -1,0 +1,3 @@
+#!/bin/bash
+
+STEAM_RUNTIME_PREFER_HOST_LIBRARIES=0 LD_LIBRARY_PATH="/usr/lib32/nvidia-396" steam

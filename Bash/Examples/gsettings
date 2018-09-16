@@ -1,0 +1,53 @@
+# Source: https://gist.github.com/msOlivers/f601da01dc61c06ec0b0adf234ac4e40
+
+#To list all settings for a app
+# gsettings list-recursively | sort | grep gedit | uniq
+
+#gtk, shell, icon theme
+gsettings set org.gnome.desktop.interface gtk-theme 'Arc'
+gsettings set org.gnome.desktop.wm.preferences theme 'Arc'
+gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'
+gsettings set org.gnome.desktop.interface cursor-theme 'Paper'
+gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+
+#gedit
+gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
+gsettings set org.gnome.gedit.preferences.editor wrap-mode 'word'
+gsettings set org.gnome.gedit.preferences.editor auto-indent true
+gsettings set org.gnome.gedit.preferences.editor use-default-font true
+gsettings set org.gnome.gedit.preferences.editor scheme 'solarized-dark'
+gsettings set org.gnome.gedit.preferences.editor insert-spaces true
+gsettings set org.gnome.gedit.preferences.editor bracket-matching true
+gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
+gsettings set org.gnome.gedit.preferences.editor tabs-size 2
+gsettings set org.gnome.gedit.preferences.editor background-pattern 'grid'
+
+#nautilus
+gsettings set org.gnome.nautilus.window-state sidebar-width 220
+gsettings set org.gnome.nautilus.preferences show-hidden-files true
+gsettings set org.gnome.nautilus.preferences sort-directories-first true
+gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
+gsettings set org.gnome.nautilus.window-state start-with-location-bar true
+gsettings set org.gnome.nautilus.list-view default-visible-columns ['name', 'size', 'permissions', 'date_modified']
+
+#rhythmbox
+gsettings set org.gnome.rhythmbox.rhythmdb locations ['file:///home/ashesh/Music']
+
+#shell-extensions
+#gsettings set org.gnome.shell enabled-extensions ['background-logo@fedorahosted.org', 'touchpad-indicator@orangeshirt', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'alternate-tab@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'mmod-panel@mmogp.com', 'caffeine@patapon.info', 'freon@UshakovVasilii_Github.yahoo.com', 'topIcons@adel.gadllah@gmail.com', 'simple-dock@nothing.org', 'shellshape@gfxmonk.net', 'dash-to-dock@micxgx.gmail.com']
+gsettings set org.gnome.shell.extensions.classic-overrides button-layout 'appmenu:minimize,maximize,close'
+gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'
+gsettings set org.gnome.shell favorite-apps ['org.gnome.Terminal.desktop', 'google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.gedit.desktop', 'gnome-tweak-tool.desktop']
+gsettings set org.gnome.shell.overrides dynamic-workspaces false
+
+#software
+gsettings set org.gnome.software download-updates false
+
+#terminal
+#gsettings set org.gnome.Terminal.ProfilesList default '2492cf69-c53e-402f-9e3b-f45b9bc5e105'
+#gsettings set org.gnome.Terminal.ProfilesList list ['b1dcc9dd-5262-4d8d-a863-c897e6d979b9', '2492cf69-c53e-402f-9e3b-f45b9bc5e105']
+gsettings set org.gnome.Terminal.Legacy.Settings dark-theme true
+gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+
+#settings
+gsettings set org.gnome.system.locale region 'en_IN.UTF-8'

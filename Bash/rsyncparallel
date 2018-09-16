@@ -1,0 +1,46 @@
+#!/bin/bash
+# Synchronize directories of interest with a remote file server
+
+function gnometerm () {
+    gnome-terminal --command="$1"
+}
+
+pause="read -rsp \"Press enter to continue...\n\""
+
+# Website
+echo "Rsyncing from raydar.net"
+gnometerm "rsync -avihn -e \"ssh -4\" raydar.net:~/www/raydarnet/ ~/code/website/raydarnet/ --exclude={.git*,.raydarnet_venv,.well-known,__pycache__,*.sock}; $pause"
+
+#echo "Rsyncing to vm"
+#rsync -avihn ~/code/website/raydarnet/ 192.168.190.130:~/www/raydarnet/
+
+#echo "Rsyncing to raydar.net"
+#rsync -avihn -e "ssh -4" --exclude={.raydarnet_venv,.git*,Hansen*} ~/code/website/raydarnet/ raydar.net:~/www/raydarnet/
+
+printf "\n\n"
+
+# Transmission
+DIR=/home/charlie/Transmission
+echo "Rsyncing $DIR"
+gnometerm "rsync -rptLivhn --progress --delete charlie@10.8.0.11:/home/charlie/Transmission ~/Data/; $pause"
+printf "\n\n"
+
+# Code
+DIR=~/Data/Code/
+echo "Rsyncing $DIR"
+gnometerm "rsync -avihn --progress --delete ~/Data/Code/ beta@10.8.0.10:/mnt/charlie/1_2TB/Data/Code/; $pause"
+printf "\n\n"
+
+# Dropbox
+DIR=~/Dropbox/
+echo "Rsyncing $DIR"
+gnometerm "rsync -avihn --progress --delete ~/Dropbox/ beta@10.8.0.10:/mnt/charlie/1_2TB/Data/Dropbox/; $pause"
+printf "\n\n"
+
+# rsync -avihn --progress --delete ~/Data/{Code,Dropbox} beta@10.8.0.10:/mnt/charlie/1_2TB/Data/
+
+# Collections
+DIR=~/Data/{Documents,Downloads,Music,Pictures,Videos}
+echo "Rsyncing $DIR"
+gnometerm "rsync -avihn --progress --delete ~/Data/{Documents,Downloads,Music,Pictures,Videos} beta@10.8.0.10:/mnt/charlie/Staging; $pause"
+printf "\n\n"

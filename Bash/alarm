@@ -7,7 +7,7 @@ TIME="0630"
 # KDE and maybe some others
 LOCK="qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock"
 # For ubuntu/gnome
-# LOCK="qdbus org.gnome.ScreenSaver /ScreenSaver Lock"
+# LOCK="gnome-screensaver-command --lock"
 
 if [ "$1" != "" ]; then # Time is specified
     TIME=$1

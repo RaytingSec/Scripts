@@ -1,6 +1,3 @@
 #!/bin/bash
 
-sudo pwd >> /dev/null
-gnome-terminal --command="htop"
-sudo gnome-terminal --command="sudo jnettop -i wlp3s0"
-sudo gnome-terminal --command="sudo iotop -o -P"
+gnome-terminal --tab --command="htop" --tab --command="sudo jnettop" --tab --command="sudo iotop -o -P"

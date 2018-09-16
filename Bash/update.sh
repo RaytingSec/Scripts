@@ -8,7 +8,8 @@ elif [[ "$1" == "-l" ]]; then
     apt list --upgradable
     # alert
 elif [[ "$1" == "--upgrade" ]] || [[ "$1" == "-u" ]] ; then # Upgrade packages
-    sudo apt dist-upgrade -y
+    sudo apt upgrade -y
+    sudo apt autoremove -y
     # alert
 elif [[ "$1" == '--help' ]]; then # help text
     echo "Sends update and upgrade commands to apt"

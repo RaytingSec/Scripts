@@ -6,7 +6,8 @@
 usr=$(whoami)
 
 # All files/folders, AND current dir
-sudo chown $usr * . -R
-sudo chgrp $usr * . -R
+#sudo chown $usr * . -R
+#sudo chgrp $usr * . -R
+sudo chown $usr:$usr * . -R
 find . -type d -exec chmod 775 {} \;
 find . -type f -exec chmod 664 {} \;

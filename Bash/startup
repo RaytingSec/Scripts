@@ -1,0 +1,11 @@
+#!/bin/bash
+
+telegram &
+slack &
+discord &
+# skypeforlinux &
+run_keybase &
+
+#heartbeat
+
+# firefox --ProfileManager

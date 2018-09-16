@@ -2,10 +2,12 @@
 # Example of using a function
 
 # Note functions declation is before it's usage
-function someFunction {
+function someFunction () {
     echo "You have entered a function"
+    echo $1
 }
 
 echo "Start"
-someFunction
+echo $1 # Script arg
+someFunction "hello" # Function arg
 echo "End"

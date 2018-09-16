@@ -1,11 +1,8 @@
 #!/bin/bash
-# Retrieves entire HTTP directoru
-# verbose
-# 10 levels
-# recursive
-# output dir
-# header
 
-wget -N -v -l 10 -r -P ~/wget --header="User-Agent: Mozilla/5.0 (Windows NT 6.0) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11" $1
-# --http-user="user" --http-password="pass"
-
+wget -nv --show-progress \
+    -r -N -l 10 -P ~/wget \
+    -e robots=off \
+    --header="User-Agent: Mozilla/5.0 (Windows NT 6.0) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11" \
+    # --http-user="user" --http-password="pass" \
+    $1
